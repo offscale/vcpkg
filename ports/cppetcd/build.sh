@@ -19,9 +19,9 @@ git submodule init
 git submodule update --depth 50
 echo "=== BUILDING ==="
 cd "$PATH_TO_SRC_DIR"
-make clean
-make CC_TARGET=$LIBRARY_NAME CC_SHARED=$SHARED -j
+make -e clean
+make CC_TARGET=$LIBRARY_NAME CC_SHARED=$SHARED -ej
 echo "=== INSTALLING ==="
-prefix="$PATH_TO_PACKAGE_DIR" make CC_TARGET=$LIBRARY_NAME CC_SHARED=$SHARED install
+prefix="$PATH_TO_PACKAGE_DIR" make CC_TARGET=$LIBRARY_NAME CC_SHARED=$SHARED -e install
 echo "=== CLEANING ==="
-make clean
+make -e clean
