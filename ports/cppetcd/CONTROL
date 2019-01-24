@@ -1,0 +1,5 @@
+Source: cppetcd
+Version: 0.1
+Build-Depends: grpc, protobuf, gtest
+Description: C++ etcd client for v3 protocol
+
