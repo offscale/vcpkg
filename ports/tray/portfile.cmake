@@ -1,0 +1,7 @@
+vcpkg_from_github(
+    OUT_SOURCE_PATH SOURCE_PATH
+    REPO dmikushin/tray
+    REF c3c7cb273f7c542689d8409063799e57ac48f328
+    SHA512 48f39afbacac135da1de17494d2bea6f9aefa288093d72a88c953c5cedae06774762b9551251ad8e3b4d31adb6ebfad2edd2417b74893620b3fc95fdf4714ad9
+    HEAD_REF master
+)

@@ -1,0 +1,5 @@
+{
+  "name": "tray",
+  "version-string": "1.0.0",
+  "description": "Tray is a cross-platform, single header, super tiny C99 implementation of a system tray icon with a popup menu."
+}
