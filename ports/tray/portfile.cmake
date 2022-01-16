@@ -5,3 +5,5 @@ vcpkg_from_github(
     SHA512 48f39afbacac135da1de17494d2bea6f9aefa288093d72a88c953c5cedae06774762b9551251ad8e3b4d31adb6ebfad2edd2417b74893620b3fc95fdf4714ad9
     HEAD_REF master
 )
+
+file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME "copyright")
