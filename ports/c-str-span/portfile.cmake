@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-str-span
-    REF             8a9d48c43dead94202d1f30ee206506627d68552
-    SHA512          50ceb504afcf6950799e26fb02f624a28ea799fa20e1ea1a3f5b355dd1a8631b8ca319b216f608c60762e6cb198a3261dfba79f0b152b6e8e5368105bd9cbe57
+    REF             79c619e6a69fde5e9610a58a6ee67a35c9173147
+    SHA512          9d16c6f7b05125dca54fe6ca36937a1266958b2fb36baea47dca993e66685ffebb2b446c766dd76024221203ab610432d88275e758114bf55dee7fc97136b87e
     HEAD_REF        master
 )
 
@@ -13,7 +13,7 @@ vcpkg_cmake_configure(
 )
 vcpkg_cmake_install()
 file(INSTALL "${SOURCE_PATH}/LICENSE-MIT"
-     DESTINATION "${CURRENT_PACKAGES_DIR}/share/c-str-span"
+     DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
      RENAME copyright)
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
