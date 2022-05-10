@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            "offscale/${PORT}"
-    REF             7ac6be153c3bf92f703d85e2ba28ca7a4feb2e7e
-    SHA512          98cb6350e6ef738cb029115b5db37fdaa1228edf660621339f3bea8cb47598c152d84cc90d058b746ebdd459aef26befe14f8635ae6e5e0ce7d11c381b6c24f2
+    REF             b981a2b068d6b9bca45d2345645d2e5d137c5e95
+    SHA512          d2954386edffa00b4eededa511dd4fdf5eb811851ac2e949af1246a4b4d10fc01c24f73bc3c5d47a3652c474d5d03efbe33fac130acf412fea54507fa355f4d1
     HEAD_REF        master
 )
 
