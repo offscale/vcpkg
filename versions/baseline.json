@@ -394,7 +394,7 @@
     },
     "b64": {
       "baseline": "2.0.0.1",
-      "port-version": 0
+      "port-version": 1
     },
     "basisu": {
       "baseline": "1.11",
@@ -1130,7 +1130,7 @@
     },
     "boringssl": {
       "baseline": "2021-06-23",
-      "port-version": 1
+      "port-version": 2
     },
     "botan": {
       "baseline": "2.19.1",
@@ -1157,8 +1157,8 @@
       "port-version": 2
     },
     "brpc": {
-      "baseline": "0.9.7",
-      "port-version": 7
+      "baseline": "1.1.0",
+      "port-version": 0
     },
     "brunocodutra-metal": {
       "baseline": "2.1.4",
@@ -1330,7 +1330,7 @@
     },
     "cgal": {
       "baseline": "5.4",
-      "port-version": 0
+      "port-version": 1
     },
     "cgicc": {
       "baseline": "3.2.19",
@@ -1871,6 +1871,10 @@
     "dimcli": {
       "baseline": "5.0.2",
       "port-version": 3
+    },
+    "directx-dxc": {
+      "baseline": "2021-12-08",
+      "port-version": 0
     },
     "directx-headers": {
       "baseline": "1.602.0",
@@ -2502,7 +2506,7 @@
     },
     "getopt-win32": {
       "baseline": "0.1",
-      "port-version": 3
+      "port-version": 4
     },
     "gettext": {
       "baseline": "0.21",
@@ -2670,7 +2674,7 @@
     },
     "graphviz": {
       "baseline": "2.49.1",
-      "port-version": 3
+      "port-version": 4
     },
     "greatest": {
       "baseline": "1.5.0",
@@ -2774,7 +2778,7 @@
     },
     "hdf5": {
       "baseline": "1.12.1",
-      "port-version": 4
+      "port-version": 5
     },
     "healpix": {
       "baseline": "1.12.10",
@@ -2797,8 +2801,8 @@
       "port-version": 0
     },
     "hidapi": {
-      "baseline": "0.11.2",
-      "port-version": 1
+      "baseline": "0.12.0",
+      "port-version": 0
     },
     "highfive": {
       "baseline": "2.3",
@@ -2854,7 +2858,7 @@
     },
     "ideviceinstaller": {
       "baseline": "1.1.2.23",
-      "port-version": 2
+      "port-version": 3
     },
     "idevicerestore": {
       "baseline": "1.0.12",
@@ -3722,7 +3726,7 @@
     },
     "libirecovery": {
       "baseline": "1.0.25",
-      "port-version": 3
+      "port-version": 4
     },
     "libjpeg-turbo": {
       "baseline": "2.1.3",
@@ -4861,8 +4865,8 @@
       "port-version": 3
     },
     "nethost": {
-      "baseline": "2019-12-21",
-      "port-version": 2
+      "baseline": "6.0.5",
+      "port-version": 0
     },
     "nettle": {
       "baseline": "3.7.3",
@@ -5950,11 +5954,11 @@
     },
     "qtkeychain": {
       "baseline": "0.13.2",
-      "port-version": 2
+      "port-version": 3
     },
     "qtkeychain-qt6": {
       "baseline": "0.13.2",
-      "port-version": 0
+      "port-version": 1
     },
     "qtlocation": {
       "baseline": "6.3.0",
@@ -6430,7 +6434,7 @@
     },
     "sdl2": {
       "baseline": "2.0.22",
-      "port-version": 0
+      "port-version": 1
     },
     "sdl2-gfx": {
       "baseline": "1.0.4",
@@ -7673,7 +7677,7 @@
       "port-version": 1
     },
     "xsimd": {
-      "baseline": "8.0.3",
+      "baseline": "8.1.0",
       "port-version": 0
     },
     "xtensor": {
