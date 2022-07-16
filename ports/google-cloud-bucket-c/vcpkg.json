@@ -1,6 +1,6 @@
 {
   "name": "google-cloud-bucket-c",
-  "version-date": "2022-03-20",
+  "version-date": "2022-07-15",
   "description": "Google Cloud Bucket Client library in C",
   "homepage": "https://github.com/offscale/google-cloud-bucket-c",
   "license": "Apache-2.0 OR MIT",
