@@ -1,16 +1,9 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-<<<<<<< HEAD
-    REPO            Immediate-Mode-UI/Nuklear
-    REF             0a77211844458673446aa99b8a0ae1090a04e413 # 2022-05-12
-    SHA512          57ad5578c534d19ce6dd5e9b8c7b725da6e7f379a5289daed6b7128a1671dc5c368175d1e780a7fcb3405fad989e3bc50a8a921d62301e64e58014e351845cae
-    HEAD_REF        master
-=======
     REPO Immediate-Mode-UI/Nuklear
     REF 0a77211844458673446aa99b8a0ae1090a04e413 # 2022-05-12
     SHA512 57ad5578c534d19ce6dd5e9b8c7b725da6e7f379a5289daed6b7128a1671dc5c368175d1e780a7fcb3405fad989e3bc50a8a921d62301e64e58014e351845cae
     HEAD_REF master
->>>>>>> master
 )
 
 file(COPY "${CURRENT_PORT_DIR}/CMakeLists.txt"
@@ -34,10 +27,4 @@ vcpkg_cmake_config_fixup(PACKAGE_NAME unofficial-nuklear)
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug")
 
-<<<<<<< HEAD
-file(INSTALL "${SOURCE_PATH}/src/LICENSE"
-     DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
-     RENAME copyright)
-=======
 file(INSTALL "${SOURCE_PATH}/src/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
->>>>>>> master
