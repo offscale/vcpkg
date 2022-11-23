@@ -1321,7 +1321,7 @@
       "port-version": 2
     },
     "cauthflow": {
-      "baseline": "0.0.1",
+      "baseline": "2022-11-23",
       "port-version": 0
     },
     "cccapstone": {
@@ -2721,7 +2721,7 @@
       "port-version": 0
     },
     "google-cloud-c": {
-      "baseline": "2022-06-29",
+      "baseline": "2022-11-23",
       "port-version": 0
     },
     "google-cloud-cpp": {
