@@ -1,9 +1,9 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO simdjson/simdjson
-    REF v1.1.0
+    REF 0d2455029d845e801809dd54b01ae47173d7d8e8 # v3.0.1
     HEAD_REF master
-    SHA512 f8718bd039e1a25f0b95880b957c43e6eba6eada6bb7f58cedde37669a46b15b3ff9f4c4ea775e1cf949657642ef0472fa8bac5bdc98882df63e7f292fb5a723
+    SHA512 37c4812b28fb39140f430b2f2c1610764fafa38ca4a44935d091a8c17f30c4334bf1c3db451d76476bde9a7499a01360d3320f8bb9d7e2234a47fd8e79ebfc13
 )
 
 vcpkg_check_features(
@@ -35,6 +35,8 @@ vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 
 vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/${PORT}")
+
+vcpkg_fixup_pkgconfig()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include" "${CURRENT_PACKAGES_DIR}/debug/share")
 
