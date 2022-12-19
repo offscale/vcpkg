@@ -5,8 +5,8 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO grpc/grpc
-    REF v1.46.3
-    SHA512 e80322b65c6f8d64dc91bce9f612119191e8d329cac2fbc5da6dad9a2a7ccaa7a501470ed483e555c3ba596e8aff796fbda2747f09e9c4329aed3de4d9b6b666
+    REF v1.50.1
+    SHA512 7c90ec9fd073980218f69eda704dbfb526dbd2f7f864135bdc6bd064789d1d8889127a253493196e617b0b90dddf1204ca9344c5e585ab0f0ca5c2a2a0a22ef1
     HEAD_REF master
     PATCHES
         00001-fix-uwp.patch
@@ -15,10 +15,10 @@ vcpkg_from_github(
         00004-link-gdi32-on-windows.patch
         00005-fix-uwp-error.patch
         00009-use-system-upb.patch
-        00011-fix-csharp_plugin.patch
         snprintf.patch
         00012-fix-use-cxx17.patch
         00014-pkgconfig-upbdefs.patch
+        00015-disable-download-archive.patch
 )
 
 if(NOT TARGET_TRIPLET STREQUAL HOST_TRIPLET)
@@ -61,7 +61,7 @@ vcpkg_cmake_configure(
         -DgRPC_INSTALL_INCLUDEDIR:STRING=include
         -DgRPC_INSTALL_CMAKEDIR:STRING=share/grpc
         "-D_gRPC_PROTOBUF_PROTOC_EXECUTABLE=${CURRENT_HOST_INSTALLED_DIR}/tools/protobuf/protoc${VCPKG_HOST_EXECUTABLE_SUFFIX}"
-        "-DPROTOBUF_PROTOC_EXECUTABLE=${CURRENT_HOST_INSTALLED_DIR}/tools/protobuf/protoc${VCPKG_HOST_EXECUTABLE_SUFFIX}"
+        "-DProtobuf_PROTOC_EXECUTABLE=${CURRENT_HOST_INSTALLED_DIR}/tools/protobuf/protoc${VCPKG_HOST_EXECUTABLE_SUFFIX}"
     MAYBE_UNUSED_VARIABLES
         gRPC_MSVC_STATIC_RUNTIME
 )
@@ -89,5 +89,10 @@ endif()
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share" "${CURRENT_PACKAGES_DIR}/debug/include")
 
 vcpkg_copy_pdbs()
+if (VCPKG_TARGET_IS_WINDOWS)
+    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/lib/pkgconfig" "${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig")
+else()
+    vcpkg_fixup_pkgconfig()
+endif()
 
 file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
