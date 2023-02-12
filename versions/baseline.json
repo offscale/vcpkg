@@ -1288,6 +1288,10 @@
       "baseline": "2020-02-29",
       "port-version": 0
     },
+    "c-str-span": {
+      "baseline": "2023-02-11",
+      "port-version": 0
+    },
     "c4core": {
       "baseline": "0.1.9",
       "port-version": 1
