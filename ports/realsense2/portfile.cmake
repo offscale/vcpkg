@@ -1,12 +1,19 @@
+vcpkg_download_distfile(ARM64_DETECTION_FIX
+    URLS https://github.com/IntelRealSense/librealsense/commit/5a244052e2df7842940dfb5a9011973a09626300.patch?full_desc=1
+    FILENAME realsense2-arm64-detection-fix-5a244052e2df7842940dfb5a9011973a09626300.patch
+    SHA512 2897a55a58ec549914378213a5decd0092a527268651e7cb140ce2dad3ee99ddde2735113a448d8a191552fc32fa40a45422b274f617c98cda3d1b3ce948204b
+)
+
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO IntelRealSense/librealsense
-    REF v2.54.1
-    SHA512 9b7146a5f6a4152d95286f679e0f5314ab0b040f67a030e42dfe01ad995af486d3d158d1ac7ef0bbe783a90e067d32e4bb4ba1a524fe75a89be6c7fe9c3a30ed
+    REF "v${VERSION}"
+    SHA512 20561294da571e0e1f5f8c9ac1039828512f3361a4241e5ad320bbb684626c1e78cd18e6a6344ec80fcd86dc699742c51069bc2b6895aec1dcbd9f394d2c9998
     HEAD_REF master
     PATCHES
         fix_openni2.patch
         fix-osx.patch # from https://github.com/IntelRealSense/librealsense/pull/11997
+        "${ARM64_DETECTION_FIX}"
 )
 
 file(COPY "${SOURCE_PATH}/src/win7/drivers/IntelRealSense_D400_series_win7.inf" DESTINATION "${SOURCE_PATH}")
@@ -70,5 +77,5 @@ if(BUILD_OPENNI2_BINDINGS)
     endif()
 endif()
 
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
 vcpkg_fixup_pkgconfig()
