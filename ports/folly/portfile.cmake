@@ -9,7 +9,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO facebook/folly
     REF "v${VERSION}"
-    SHA512 f129d4e530b5c8aaf4cbfb0c813e84ee911ec26e43fa01e6e1c9557501c605a8123d46d0c689b32eb5e5a57280968662a5fa370ede17af7526db59545e9a70db
+    SHA512 cb8feb35e51072555b910613e87f079acd1f97892df0e6f3888bd9a8a336ca6183d552bfb4e16cfafbf8f5a7ec3f2a85dda686c74528e23e4bc821b2f67bfa77
     HEAD_REF main
     PATCHES
         disable-non-underscore-posix-names.patch
