@@ -3,8 +3,8 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO syoyo/tinyexr
-    REF v1.0.1
-    SHA512 ba3bc09e7c2a93016b260849eb365a05fe1113c55f824767a19a20e3a6ff2a09dd686aa15094dd6c4508e68915dc8eb4a0ccc9778de73d9b55354701e7820e76
+    REF "v${VERSION}"
+    SHA512 19187cbd703c7a2f9e5322a123453cbd56d2b842d1e8f026831d405e9356b8f2a7fde5a2c6b601ee3a28f0a00293d635245b8b70bf03375cce56b5b816d5d54a
     HEAD_REF master
     PATCHES
         fixtargets.patch

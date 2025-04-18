@@ -3,12 +3,12 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO webview/webview
-    REF 2ee04ccd0530e3928a872f5d508c114403803e61 #commit-2022-09-07
-    SHA512 c784635a0c0948d91fea12643b04f0125e0be64d34aeddafbd0240aa977e867fa74efaf4e5dea7fe207bc0d1461b544f483d6228bf92dade7dc0d5e2c5a585a6
+    REF ${VERSION}
+    SHA512 f198e414145101693fd2b5724fb017df578770c6edda319ce312cf9e9e1fdc1b1d94beba2e64e75d9746dee16010cc525be8ae7ca0713ee541b75a0a1d9bc791
     HEAD_REF master
 )
 
-file(COPY "${SOURCE_PATH}/webview.h" DESTINATION "${CURRENT_PACKAGES_DIR}/include")
+file(COPY "${SOURCE_PATH}/core/include/webview.h" DESTINATION "${CURRENT_PACKAGES_DIR}/include")
 
 set(WEBVIEW_GTK "0")
 set(WEBVIEW_EDGE "0")
@@ -51,4 +51,4 @@ string(REPLACE
 file(WRITE "${CURRENT_PACKAGES_DIR}/include/webview.h" "${_contents}")
 
 # Handle copyright
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

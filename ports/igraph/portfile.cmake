@@ -4,9 +4,9 @@
 #  - The release tarball contains pre-generated parser sources, which eliminates the dependency on bison/flex.
 
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/igraph/igraph/releases/download/0.10.4/igraph-0.10.4.tar.gz"
-    FILENAME "igraph-0.10.4.tar.gz"
-    SHA512 71bcec5f0ba100aae7614753f9232a4221580b822b4dc120e3a80eab59d70c42aedddb00728eb13faf7e522332c514c2e030314c416ded8a70e5de990ea8039b
+    URLS "https://github.com/igraph/igraph/releases/download/0.10.15/igraph-0.10.15.tar.gz"
+    FILENAME "igraph-0.10.15.tar.gz"
+    SHA512 bf9f0f2f62618cf037bdbbf2e126d27ec4e45edfb65efcf26df3fc1fb71a3e1f05a8b9a62f972650d96daa1e7bd3f2a084fe39bbca42e808cc737165514276e0
 )
 
 vcpkg_extract_source_archive(
@@ -14,6 +14,7 @@ vcpkg_extract_source_archive(
     ARCHIVE ${ARCHIVE}
     PATCHES
       "glpk-uwp.patch" # patch GLPK for UWP compatibility
+      "constant-nan.patch" # Workaround https://developercommunity.visualstudio.com/t/NAN-is-no-longer-compile-time-constant-i/10688907
 )
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS

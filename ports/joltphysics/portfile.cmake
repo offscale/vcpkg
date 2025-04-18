@@ -4,13 +4,18 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO jrouwe/JoltPhysics
     REF "v${VERSION}"
-    SHA512 c5848fe7a28de1b34259d3d21e4cd35bec4002eee926445e05d902934c43ab4cafcfa24ceb037c59cc66c3dcea5f3a737546f88c20be594dafe6ce6d1f637abb
+    SHA512 cc6f9cbae1e867fcc2da31bd266fcadb3ef1913cb8a3e468d455612a2c9e55d036ec7a926d7fdd8adf3958da11e5cab368107dd4fc68b01106b4910cd58e1d39
     HEAD_REF master
-    PATCHES
-        disable-warningC5266.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_CRT_LINKAGE}" "static" USE_STATIC_CRT)
+
+vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+    FEATURES
+        debugrenderer       DEBUG_RENDERER_IN_DEBUG_AND_RELEASE
+        profiler            PROFILER_IN_DEBUG_AND_RELEASE
+        rtti                CPP_RTTI_ENABLED
+)
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}/Build"
@@ -21,28 +26,20 @@ vcpkg_cmake_configure(
         -DTARGET_SAMPLES=OFF
         -DTARGET_VIEWER=OFF
         -DCROSS_PLATFORM_DETERMINISTIC=OFF
+        -DINTERPROCEDURAL_OPTIMIZATION=OFF
         -DUSE_STATIC_MSVC_RUNTIME_LIBRARY=${USE_STATIC_CRT}
+        -DENABLE_ALL_WARNINGS=OFF
+        -DOVERRIDE_CXX_FLAGS=OFF
+        ${FEATURE_OPTIONS}
     OPTIONS_RELEASE
-        -DCMAKE_BUILD_TYPE=Distribution
+        -DGENERATE_DEBUG_SYMBOLS=OFF
 )
 
-vcpkg_cmake_build()
+vcpkg_cmake_install()
+vcpkg_copy_pdbs()
+vcpkg_fixup_pkgconfig()
 
-file(
-    INSTALL "${SOURCE_PATH}/Jolt"
-    DESTINATION "${CURRENT_PACKAGES_DIR}/include"
-    FILES_MATCHING
-        PATTERN "*.h"
-        PATTERN "*.inl"
-)
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
+vcpkg_cmake_config_fixup(PACKAGE_NAME Jolt CONFIG_PATH "lib/cmake/Jolt")
 
-if(VCPKG_TARGET_IS_WINDOWS)
-    file(INSTALL "${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-dbg/Jolt.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
-    file(INSTALL "${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-rel/Jolt.lib" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-else()
-    file(INSTALL "${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-dbg/libJolt.a" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
-    file(INSTALL "${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-rel/libJolt.a" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
-endif()
-
-file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

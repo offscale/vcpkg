@@ -1,21 +1,20 @@
-
+set(EXTRA_PATCHES "")
 if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
-    set(PATCHES fix_clang-cl_build.patch)
+    list(APPEND EXTRA_PATCHES fix_clang-cl_build.patch)
 endif()
 
+list(APPEND EXTRA_PATCHES dw-extra.patch)
+
 vcpkg_from_gitlab(
-    GITLAB_URL https://gitlab.freedesktop.org
     OUT_SOURCE_PATH SOURCE_PATH
+    GITLAB_URL https://gitlab.freedesktop.org
     REPO cairo/cairo
-    REF b43e7c6f3cf7855e16170a06d3a9c7234c60ca94 #v1.17.6
-    SHA512 2d8f0cbb11638610eda104a370bb8450e28d835852b0f861928738a60949e0aaba7a554a9f9efabbefda10a37616d4cd0d3021b3fbb4ced1d52db1edb49bc358
-    HEAD_REF master
+    REF "${VERSION}"
+    SHA512 5731eaa48857561aad023214ebb7be70344579a4bc75d00c46f8c622b4d34be7f79ab02e2cd54a419086490a3bf31aafa2418d873833b475b9824e3f2f5b17b6
     PATCHES
-        cairo_static_fix.patch
-        disable-atomic-ops-check.patch # See https://gitlab.freedesktop.org/cairo/cairo/-/issues/554
-        mingw-dllexport.patch
-        fix-static-missing-lib-msimg32.patch
-        ${PATCHES}
+        cairo_add_lzo_feature_option.patch
+        msvc-convenience.diff
+        ${EXTRA_PATCHES}
 )
 
 if("fontconfig" IN_LIST FEATURES)
@@ -45,13 +44,20 @@ else()
     list(APPEND OPTIONS -Dglib=disabled)
 endif()
 
+if("lzo" IN_LIST FEATURES)
+    list(APPEND OPTIONS -Dlzo=enabled)
+else()
+    list(APPEND OPTIONS -Dlzo=disabled)
+endif()
+
 if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
     set(ENV{CPP} "cl_cpp_wrapper")
 endif()
 
 vcpkg_configure_meson(
     SOURCE_PATH "${SOURCE_PATH}"
-    OPTIONS ${OPTIONS}
+    OPTIONS
+        ${OPTIONS}
         -Dtests=disabled
         -Dzlib=enabled
         -Dpng=enabled
@@ -63,28 +69,15 @@ vcpkg_install_meson()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
-set(_file "${CURRENT_PACKAGES_DIR}/include/cairo/cairo.h")
-file(READ ${_file} CAIRO_H)
 if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
-    string(REPLACE "defined (CAIRO_WIN32_STATIC_BUILD)" "1" CAIRO_H "${CAIRO_H}")
-else()
-    string(REPLACE "defined (CAIRO_WIN32_STATIC_BUILD)" "0" CAIRO_H "${CAIRO_H}")
+    vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/include/cairo/cairo.h" "defined(CAIRO_WIN32_STATIC_BUILD)" "1")
 endif()
-file(WRITE ${_file} "${CAIRO_H}")
 
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 
-#TODO: Fix script
-#set(TOOLS)
-#if(EXISTS "${CURRENT_PACKAGES_DIR}/bin/cairo-trace${VCPKG_TARGET_EXECUTABLE_SUFFIX}")
-#    list(APPEND TOOLS cairo-trace) # sh script which needs to be fixed due to absolute paths in it.
-#endif()
-#vcpkg_copy_tools(TOOL_NAMES ${TOOLS} AUTO_CLEAN)
-
-if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+if(VCPKG_LIBRARY_LINKAGE STREQUAL "static" OR NOT VCPKG_TARGET_IS_WINDOWS)
     file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")
 endif()
 
-# Handle copyright
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING" "${SOURCE_PATH}/COPYING-LGPL-2.1" "${SOURCE_PATH}/COPYING-MPL-1.1")

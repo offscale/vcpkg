@@ -10,6 +10,7 @@ done
 vcpkgDisableMetrics="OFF"
 vcpkgUseSystem=false
 vcpkgUseMuslC="OFF"
+vcpkgSkipDependencyChecks="OFF"
 for var in "$@"
 do
     if [ "$var" = "-disableMetrics" -o "$var" = "--disableMetrics" ]; then
@@ -20,15 +21,18 @@ do
         echo "Warning: -allowAppleClang no longer has any effect; ignored."
     elif [ "$var" = "-buildTests" ]; then
         echo "Warning: -buildTests no longer has any effect; ignored."
+    elif [ "$var" = "-skipDependencyChecks" ]; then
+        vcpkgSkipDependencyChecks="OFF"
     elif [ "$var" = "-musl" ]; then
         vcpkgUseMuslC="ON"
     elif [ "$var" = "-help" -o "$var" = "--help" ]; then
         echo "Usage: ./bootstrap-vcpkg.sh [options]"
         echo
         echo "Options:"
-        echo "    -help                Display usage help"
-        echo "    -disableMetrics      Mark this vcpkg root to disable metrics."
-        echo "    -musl                Use the musl binary rather than the glibc binary on Linux."
+        echo "    -help                 Display usage help"
+        echo "    -disableMetrics       Mark this vcpkg root to disable metrics."
+        echo "    -skipDependencyChecks Skip checks for vcpkg prerequisites. vcpkg may not run."
+        echo "    -musl                 Use the musl binary rather than the glibc binary on Linux."
         exit 1
     else
         echo "Unknown argument $var. Use '-help' for help."
@@ -36,9 +40,9 @@ do
     fi
 done
 
-# Enable using this entry point on windows from git bash by redirecting to the .bat file.
-unixName=$(uname -s | sed 's/MINGW.*_NT.*/MINGW_NT/')
-if [ "$unixName" = "MINGW_NT" ]; then
+# Enable using this entry point on Windows from an msys2 or cygwin bash env. (e.g., git bash) by redirecting to the .bat file.
+unixKernelName=$(uname -s | sed -E 's/(CYGWIN|MINGW|MSYS).*_NT.*/\1_NT/')
+if [ "$unixKernelName" = CYGWIN_NT ] || [ "$unixKernelName" = MINGW_NT ] || [ "$unixKernelName" = MSYS_NT ]; then
     if [ "$vcpkgDisableMetrics" = "ON" ]; then
         args="-disableMetrics"
     else
@@ -66,22 +70,24 @@ fi
 vcpkgCheckRepoTool()
 {
     __tool=$1
-    if ! command -v "$__tool" >/dev/null 2>&1 ; then
-        echo "Could not find $__tool. Please install it (and other dependencies) with:"
-        echo "On Debian and Ubuntu derivatives:"
-        echo "  sudo apt-get install curl zip unzip tar"
-        echo "On recent Red Hat and Fedora derivatives:"
-        echo "  sudo dnf install curl zip unzip tar"
-        echo "On older Red Hat and Fedora derivatives:"
-        echo "  sudo yum install curl zip unzip tar"
-        echo "On SUSE Linux and derivatives:"
-        echo "  sudo zypper install curl zip unzip tar"
-        echo "On Arch Linux and derivatives:"
-        echo "  sudo pacman -S curl zip unzip tar cmake ninja"
-        echo "On Alpine:"
-        echo "  apk add build-base cmake ninja zip unzip curl git"
-        echo "  (and export VCPKG_FORCE_SYSTEM_BINARIES=1)"
-        exit 1
+    if [ "$vcpkgSkipDependencyChecks" = "ON" ]; then
+        if ! command -v "$__tool" >/dev/null 2>&1 ; then
+            echo "Could not find $__tool. Please install it (and other dependencies) with:"
+            echo "On Debian and Ubuntu derivatives:"
+            echo "  sudo apt-get install curl zip unzip tar"
+            echo "On recent Red Hat and Fedora derivatives:"
+            echo "  sudo dnf install curl zip unzip tar"
+            echo "On older Red Hat and Fedora derivatives:"
+            echo "  sudo yum install curl zip unzip tar"
+            echo "On SUSE Linux and derivatives:"
+            echo "  sudo zypper install curl zip unzip tar"
+            echo "On Arch Linux and derivatives:"
+            echo "  sudo pacman -Syu base-devel git curl zip unzip tar cmake ninja"
+            echo "On Alpine:"
+            echo "  apk add build-base cmake ninja zip unzip curl git"
+            echo "  (and export VCPKG_FORCE_SYSTEM_BINARIES=1)"
+            exit 1
+        fi
     fi
 }
 
@@ -100,60 +106,25 @@ fi
 
 if [ "$UNAME" = "OpenBSD" ]; then
     vcpkgUseSystem="ON"
-
-    if [ -z "$CXX" ]; then
-        CXX=/usr/bin/clang++
-    fi
-    if [ -z "$CC" ]; then
-        CC=/usr/bin/clang
-    fi
 fi
 
 if [ "$vcpkgUseSystem" = "ON" ]; then
     vcpkgCheckRepoTool cmake
     vcpkgCheckRepoTool ninja
     vcpkgCheckRepoTool git
-    vcpkgCheckRepoTool gcc
 fi
 
-# Determine what we are going to do to bootstrap:
-# MacOS -> Download vcpkg-macos
-# Linux
-#   useMuslC -> download vcpkg-muslc
-#   amd64 -> download vcpkg-glibc
-# Otherwise
-#   Download and build from source
-
-# Choose the vcpkg binary to download
-vcpkgDownloadTool="ON"
-vcpkgToolReleaseTag="2023-01-24"
-if [ "$UNAME" = "Darwin" ]; then
-    echo "Downloading vcpkg-macos..."
-    vcpkgToolReleaseSha="c447465f5d7f467e4b9e9eb7f42fdbd2b8973c87a00da8f00bfd937f1ce351e546c15740476df7608d3f8117c10b0e6f693f03f7db63f7982964297eae95e46e"
-    vcpkgToolName="vcpkg-macos"
-elif [ "$vcpkgUseMuslC" = "ON" ]; then
-    echo "Downloading vcpkg-muslc..."
-    vcpkgToolReleaseSha="bee46fe90410f510a91f213350ffe3245c79cfe5e741c832b22ba4b68a487be903d3198fc0399c3a124c3d6deff2a4d0689fa171d5a710edc67f88d900782fcf"
-    vcpkgToolName="vcpkg-muslc"
-elif [ "$ARCH" = "x86_64" ]; then
-    echo "Downloading vcpkg-glibc..."
-    vcpkgToolReleaseSha="64671187c4db1656a5b8249b6094a176d264d70fb315af408eb76eee40118ff8f40fedbbb55239e68d9cefe8736c510785de78280c1c10def82960d803becf4e"
-    vcpkgToolName="vcpkg-glibc"
-else
-    echo "Unable to determine a binary release of vcpkg; attempting to build from source."
-    vcpkgDownloadTool="OFF"
-    vcpkgToolReleaseSha="268592bd75916bd4b19b4bd42535d9886dfd46121b222f991daa32b7bb60c98203b8d944eb711ea61841f9085a3eacb09ca7c9ec8553b9eb82beca06b5631787"
-fi
-
-# Do the download or build.
 vcpkgCheckEqualFileHash()
 {
     url=$1; filePath=$2; expectedHash=$3
 
     if command -v "sha512sum" >/dev/null 2>&1 ; then
         actualHash=$(sha512sum "$filePath")
+    elif command -v "sha512" >/dev/null 2>&1 ; then
+        # OpenBSD
+        actualHash=$(sha512 -q "$filePath")
     else
-        # sha512sum is not available by default on osx
+        # [g]sha512sum is not available by default on osx
         # shasum is not available by default on Fedora
         actualHash=$(shasum -a 512 "$filePath")
     fi
@@ -191,37 +162,52 @@ vcpkgExtractTar()
     mv "$toPath.partial" "$toPath"
 }
 
-if [ "$vcpkgDownloadTool" = "ON" ]; then
-    vcpkgDownloadFile "https://github.com/microsoft/vcpkg-tool/releases/download/$vcpkgToolReleaseTag/$vcpkgToolName" "$vcpkgRootDir/vcpkg" $vcpkgToolReleaseSha
-else
-    if [ "x$CXX" = "x" ]; then
-        if which g++-12 >/dev/null 2>&1; then
-            CXX=g++-12
-        elif which g++-11 >/dev/null 2>&1; then
-            CXX=g++-11
-        elif which g++-10 >/dev/null 2>&1; then
-            CXX=g++-10
-        elif which g++-9 >/dev/null 2>&1; then
-            CXX=g++-9
-        elif which g++-8 >/dev/null 2>&1; then
-            CXX=g++-8
-        elif which g++-7 >/dev/null 2>&1; then
-            CXX=g++-7
-        elif which g++-6 >/dev/null 2>&1; then
-            CXX=g++-6
-        elif which g++ >/dev/null 2>&1; then
-            CXX=g++
-        fi
-        # If we can't find g++, allow CMake to do the look-up
-    fi
+# Determine what we are going to do to bootstrap:
+# MacOS -> Download vcpkg-macos
+# Linux
+#   useMuslC -> download vcpkg-muslc
+#   amd64 -> download vcpkg-glibc
+#   arm64 -> download vcpkg-glibc-arm64
+# Otherwise
+#   Download and build from source
 
-    vcpkgToolReleaseTarball="$vcpkgToolReleaseTag.tar.gz"
+# Read the vcpkg-tool config file to determine what release to download
+. "$vcpkgRootDir/scripts/vcpkg-tool-metadata.txt"
+
+vcpkgDownloadTool="ON"
+if [ "$UNAME" = "Darwin" ]; then
+    echo "Downloading vcpkg-macos..."
+    vcpkgToolReleaseSha=$VCPKG_MACOS_SHA
+    vcpkgToolName="vcpkg-macos"
+elif [ "$vcpkgUseMuslC" = "ON" ] && [ "$ARCH" = "x86_64" ]; then
+    echo "Downloading vcpkg-muslc..."
+    vcpkgToolReleaseSha=$VCPKG_MUSLC_SHA
+    vcpkgToolName="vcpkg-muslc"
+elif [ "$ARCH" = "x86_64" ]; then
+    echo "Downloading vcpkg-glibc..."
+    vcpkgToolReleaseSha=$VCPKG_GLIBC_SHA
+    vcpkgToolName="vcpkg-glibc"
+elif [ "$vcpkgUseMuslC" = "OFF" ] && { [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; }; then
+    echo "Downloading vcpkg-arm64-glibc..."
+    vcpkgToolReleaseSha=$VCPKG_GLIBC_ARM64_SHA
+    vcpkgToolName="vcpkg-glibc-arm64"
+else
+    echo "Unable to determine a binary release of vcpkg; attempting to build from source."
+    vcpkgDownloadTool="OFF"
+    vcpkgToolReleaseSha=$VCPKG_TOOL_SOURCE_SHA
+fi
+
+# Do the download or build.
+if [ "$vcpkgDownloadTool" = "ON" ]; then
+    vcpkgDownloadFile "https://github.com/microsoft/vcpkg-tool/releases/download/$VCPKG_TOOL_RELEASE_TAG/$vcpkgToolName" "$vcpkgRootDir/vcpkg" $vcpkgToolReleaseSha
+else
+    vcpkgToolReleaseTarball="$VCPKG_TOOL_RELEASE_TAG.tar.gz"
     vcpkgToolUrl="https://github.com/microsoft/vcpkg-tool/archive/$vcpkgToolReleaseTarball"
     baseBuildDir="$vcpkgRootDir/buildtrees/_vcpkg"
     buildDir="$baseBuildDir/build"
     tarballPath="$downloadsDir/$vcpkgToolReleaseTarball"
     srcBaseDir="$baseBuildDir/src"
-    srcDir="$srcBaseDir/vcpkg-tool-$vcpkgToolReleaseTag"
+    srcDir="$srcBaseDir/vcpkg-tool-$VCPKG_TOOL_RELEASE_TAG"
 
     if [ -e "$tarballPath" ]; then
         vcpkgCheckEqualFileHash "$vcpkgToolUrl" "$tarballPath" "$vcpkgToolReleaseSha"
@@ -240,12 +226,14 @@ else
         cmakeConfigOptions=" $cmakeConfigOptions '-DCMAKE_JOB_POOL_COMPILE:STRING=compile' '-DCMAKE_JOB_POOL_LINK:STRING=link' '-DCMAKE_JOB_POOLS:STRING=compile=$VCPKG_MAX_CONCURRENCY;link=$VCPKG_MAX_CONCURRENCY' "
     fi
 
-    (cd "$buildDir" && CXX="$CXX" eval cmake "$srcDir" $cmakeConfigOptions) || exit 1
+    (cd "$buildDir" && eval cmake "$srcDir" $cmakeConfigOptions) || exit 1
     (cd "$buildDir" && cmake --build .) || exit 1
 
     rm -rf "$vcpkgRootDir/vcpkg"
     cp "$buildDir/vcpkg" "$vcpkgRootDir/"
 fi
+
+"$vcpkgRootDir/vcpkg" version --disable-metrics
 
 # Apply the disable-metrics marker file.
 if [ "$vcpkgDisableMetrics" = "ON" ]; then

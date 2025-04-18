@@ -2,19 +2,6 @@
 
 set -e
 
-export PATH="$PATH:/usr/bin"
-
-command -v cygpath >/dev/null && have_cygpath=1
-
-cygpath() {
-    if [ -n "$have_cygpath" ]; then
-        command cygpath "$@"
-    else
-        eval _p='$'$#
-        printf '%s\n' "$_p"
-    fi
-}
-
 move_binary() {
     SOURCE=$1
     TARGET=$2
@@ -70,15 +57,9 @@ merge_binaries() {
     done
 }
 
-export PKG_CONFIG_PATH="$(cygpath -p "${PKG_CONFIG_PATH}")"
-
-# Export HTTP(S)_PROXY as http(s)_proxy:
-[ -n "$HTTP_PROXY"  ] && export http_proxy="$HTTP_PROXY"
-[ -n "$HTTPS_PROXY" ] && export https_proxy="$HTTPS_PROXY"
-
-PATH_TO_BUILD_DIR=$(  cygpath "@BUILD_DIR@")
-PATH_TO_SRC_DIR=$(    cygpath "@SOURCE_PATH@")
-PATH_TO_PACKAGE_DIR=$(cygpath "@INST_PREFIX@")
+PATH_TO_BUILD_DIR="@BUILD_DIR@"
+PATH_TO_SRC_DIR="@SOURCE_PATH@"
+PATH_TO_PACKAGE_DIR="@INST_PREFIX@"
 
 JOBS=@VCPKG_CONCURRENCY@
 
@@ -92,10 +73,17 @@ OSX_ARCH_COUNT=0@OSX_ARCH_COUNT@
 # arm64 Android build fails with 'relocation R_AARCH64_ADR_PREL_PG_HI21 cannot be used against symbol ff_cos_32; recompile with -fPIC'
 # x86 Android build fails with 'error: inline assembly requires more registers than available'.
 # x64 Android build fails with 'relocation R_X86_64_PC32 cannot be used against symbol ff_h264_cabac_tables; recompile with -fPIC'
-OPTIONS_arm=" --disable-asm --disable-x86asm"
-OPTIONS_arm64=" --enable-asm --disable-x86asm"
-OPTIONS_x86=" --enable-asm --enable-x86asm"
-OPTIONS_x86_64="${OPTIONS_x86}"
+if [ "@VCPKG_CMAKE_SYSTEM_NAME@" = "Android" ]; then
+    OPTIONS_arm=" --disable-asm --disable-x86asm"
+    OPTIONS_arm64=" --disable-asm --disable-x86asm"
+    OPTIONS_x86=" --disable-asm --disable-x86asm"
+    OPTIONS_x86_64="${OPTIONS_x86}"
+else
+    OPTIONS_arm=" --disable-asm --disable-x86asm"
+    OPTIONS_arm64=" --enable-asm --disable-x86asm"
+    OPTIONS_x86=" --enable-asm --enable-x86asm"
+    OPTIONS_x86_64="${OPTIONS_x86}"
+fi
 
 build_ffmpeg() {
     # extract build architecture
@@ -123,13 +111,13 @@ build_ffmpeg() {
 
 cd "$PATH_TO_BUILD_DIR"
 
-if [ $OSX_ARCH_COUNT -gt 1 ]; then
+if [ $OSX_ARCH_COUNT -gt 0 ]; then
     for ARCH in $OSX_ARCHS; do
         echo "=== CLEANING FOR $ARCH ==="
 
         make clean && make distclean
 
-        build_ffmpeg $ARCH --enable-cross-compile --extra-cflags=-arch --extra-cflags=$ARCH --extra-ldflags=-arch --extra-ldflags=$ARCH
+        build_ffmpeg $ARCH --extra-cflags=-arch --extra-cflags=$ARCH --extra-ldflags=-arch --extra-ldflags=$ARCH
 
         echo "=== COLLECTING BINARIES FOR $ARCH ==="
 

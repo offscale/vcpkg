@@ -3,15 +3,20 @@ vcpkg_from_sourceforge(
     REPO mpg123/mpg123
     REF "${VERSION}"
     FILENAME "mpg123-${VERSION}.tar.bz2"
-    SHA512 eca285382ee3e780353834addf1336c4a2f8f11256af22f95e11efa243de669761c083c86ddfc6ac8c02a920a3c4ab4ad767efa2739fb052e9719f35ef407bc3
+    SHA512 dccb640b0845061811cb41bf145587e7093556d686d49a748232b079659b46284b6cc40db42d14febceac11277c58edf2b69d1b4c46c223829a3d15478e2e26c
     PATCHES
-        fix-modulejack.patch
-        fix-m1-build.patch
+        fix-dllexport.diff
+        have-fpu.diff
+        pkgconfig.diff
 )
 
 if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
-    include("${CURRENT_INSTALLED_DIR}/share/yasm-tool-helper/yasm-tool-helper.cmake")
     yasm_tool_helper(APPEND_TO_PATH)
+endif()
+
+vcpkg_list(SET options)
+if(VCPKG_TARGET_IS_WINDOWS)
+    vcpkg_list(APPEND options "-DLIBMPG123_LIBS=-lshlwapi")
 endif()
 
 vcpkg_cmake_configure(
@@ -19,19 +24,20 @@ vcpkg_cmake_configure(
     OPTIONS
         -DUSE_MODULES=OFF
         -DBUILD_PROGRAMS=OFF
+        -DCMAKE_DISABLE_FIND_PACKAGE_ALSA=ON
+        -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON
+        ${options}
     MAYBE_UNUSED_VARIABLES
         BUILD_PROGRAMS
+        CMAKE_DISABLE_FIND_PACKAGE_ALSA
+        CMAKE_DISABLE_FIND_PACKAGE_PkgConfig
 )
 vcpkg_cmake_install()
+vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/${PORT})
 vcpkg_fixup_pkgconfig()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
-
-if(VCPKG_TARGET_IS_OSX)
-    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin")
-    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
-endif()
 
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")

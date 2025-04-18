@@ -1,24 +1,29 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO sammycage/lunasvg
-  REF e612abda858b53160041381a23422cd2b4f42fbd #2.3.1
-  SHA512 44f5d013d918cb5af90114a12857bdd2c204caff761516ef98b12b08d8b6215e91f6d963c281500c386f287b9d0ecd5b3d986d4c8c33423c0c34d539d744e09d
+  REF "v${VERSION}"
+  SHA512 6ea8ef74a18047e2714aacc6c162c42519246c38061290053461e7c5c0922234534a031bdb84eaff7bea46da4d8edd1e3cdd00d710c066600c9024fa2a134a03
   HEAD_REF master
   PATCHES
-    fix-install.patch
+    # temporary patch. It should be removed once the new version of lunasvg is released.
+    fix-plutovg.patch
 )
 
 vcpkg_cmake_configure(
   SOURCE_PATH "${SOURCE_PATH}"
   OPTIONS
+    -DCMAKE_REQUIRE_FIND_PACKAGE_plutovg=1
     -DLUNASVG_BUILD_EXAMPLES=OFF
-    -DBUILD_SHARED_LIBS=OFF
 )
 
 vcpkg_cmake_install()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/lunasvg)
+
+if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+  vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/include/lunasvg/lunasvg.h" "defined(LUNASVG_BUILD_STATIC)" "1")
+endif()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
-# Handle copyright
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

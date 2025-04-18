@@ -1,14 +1,13 @@
-vcpkg_minimum_required(VERSION 2022-10-12) # for ${VERSION}
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO OSGeo/PROJ
     REF "${VERSION}"
-    SHA512 bdc3cba27f330829b30290f563cb1cded75d3861909399177334a354662f4cb54e05baef40b8d267978c746f41543c3de1c119ca08919c87fd9460506c5c566e
+    SHA512 45d8bfb883431c62c2627cecf583a4374efda7f109c2b43d3fe8ef18136f30cf57682d6e6c44256ba099533754392c87f71e940a41018a577f540310001e0f05
     HEAD_REF master
     PATCHES
-        fix-win-output-name.patch
         fix-proj4-targets-cmake.patch
-        remove-doc.patch
+        remove_toolset_restriction.patch
+        sqlite.diff
 )
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
@@ -33,7 +32,10 @@ vcpkg_cmake_configure(
         ${FEATURE_OPTIONS}
         -DNLOHMANN_JSON=external
         -DBUILD_TESTING=OFF
+        -DBUILD_EXAMPLES=OFF
         "-DEXE_SQLITE3=${EXE_SQLITE3}"
+        -DPROJ_DATA_ENV_VAR_TRIED_LAST=ON
+        -DEMBED_PROJ_DATA_PATH=OFF
     OPTIONS_DEBUG
         -DBUILD_APPS=OFF
 )
@@ -55,8 +57,12 @@ if ("tools" IN_LIST FEATURES)
     vcpkg_copy_tools(TOOL_NAMES ${TOOL_NAMES} AUTO_CLEAN)
 endif ()
 
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
+file(REMOVE_RECURSE
+    "${CURRENT_PACKAGES_DIR}/debug/include"
+    "${CURRENT_PACKAGES_DIR}/debug/share"
+    "${CURRENT_PACKAGES_DIR}/share/doc"
+    "${CURRENT_PACKAGES_DIR}/share/man"
+)
 
 vcpkg_copy_pdbs()
 
@@ -66,4 +72,4 @@ if(NOT DEFINED VCPKG_BUILD_TYPE AND VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET
 endif()
 
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
-file(INSTALL "${SOURCE_PATH}/COPYING" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")

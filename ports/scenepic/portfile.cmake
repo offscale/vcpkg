@@ -1,11 +1,10 @@
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
-vcpkg_minimum_required(VERSION 2022-10-12) # for ${VERSION}
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO  microsoft/scenepic 
     REF "v${VERSION}"
-    SHA512 2d9dfcefa7a054cf0addb12113ab65cb7dd3a8a6f7b42f60558a5d47a6de45a9e801be3266b81358ff8ac075dd9e9e2b9369905d62f2383531d6e28e93406ac9
+    SHA512 79c20697051ef7061a51cc73f232e5ba83f8bc5a62ee3b9a4d55182112b201c805c25461fcd6699cc6db70c4439b116d1d27e66cd4e431471438ac7968836eed
     HEAD_REF main
     PATCHES
         "fix_dependencies.patch"
@@ -24,6 +23,7 @@ execute_process(
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
+    DISABLE_PARALLEL_CONFIGURE
     OPTIONS
         -DCPP_TARGETS=cpp
 )   

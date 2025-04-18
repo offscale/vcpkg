@@ -1,20 +1,16 @@
+set(VCPKG_BUILD_TYPE release) # header-only
+
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO Tradias/asio-grpc
-    REF v2.4.0
-    SHA512 0aee11649d4df7c2f0964844b7f479eb6a1a8f51c1286345fdc14cba8581e951976cd48b1e00d1148b4fcf8519f578abb43038ba44996afd1de5195e24e22ee1
+    REF "v${VERSION}"
+    SHA512 129340a9ca978000dc5c979d93f4f98b52e174da13e7850f77b25b060ae52c7c5cf9fa3f83075d64f46cf662e527e587810aeb27ce21454b0e387386a623cfec
     HEAD_REF master
-)
-
-vcpkg_check_features(
-    OUT_FEATURE_OPTIONS FEATURE_OPTIONS
-    FEATURES
-        boost-container ASIO_GRPC_USE_BOOST_CONTAINER
 )
 
 vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    OPTIONS ${FEATURE_OPTIONS}
+    OPTIONS
         -DASIO_GRPC_CMAKE_CONFIG_INSTALL_DIR=share/asio-grpc
 )
 

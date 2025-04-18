@@ -1,4 +1,4 @@
-if(EXISTS ${CURRENT_INSTALLED_DIR}/share/libturbo-jpeg/copyright)
+if(EXISTS ${CURRENT_INSTALLED_DIR}/share/libjpeg-turbo/copyright)
     message(FATAL_ERROR "'${PORT}' conflicts with 'libturbo-jpeg'. Please remove libturbo-jpeg:${TARGET_TRIPLET}, and try to install ${PORT}:${TARGET_TRIPLET} again.")
 endif()
 if(EXISTS ${CURRENT_INSTALLED_DIR}/share/mozjpeg/copyright)
@@ -14,8 +14,8 @@ vcpkg_download_distfile(ARCHIVE
     FILENAME    "jpegsr9e.zip"
     SHA512      db7a2fb44e5cc20d61956c46334948af034c07cdcc0d6e41d9bd4f6611c0fbed8943d0a05029ba1bfb9d993f4acd0df5e95d0bc1cfb5a889b86a55b6b75fdf64
 )
-vcpkg_extract_source_archive_ex(
-    OUT_SOURCE_PATH SOURCE_PATH
+vcpkg_extract_source_archive(
+    SOURCE_PATH
     ARCHIVE ${ARCHIVE}
 )
 
@@ -41,7 +41,7 @@ vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 
 # There is no LICENSE file, but README containes some legal text.
-file(INSTALL "${SOURCE_PATH}/README" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/README")
 
 if(VCPKG_LIBRARY_LINKAGE STREQUAL static)
     file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")

@@ -1,8 +1,12 @@
+# NOTE: All changes made to this file will get overwritten by the next port release.
+# Please contribute your changes to https://github.com/Azure/azure-sdk-for-cpp.
+
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO Azure/azure-sdk-for-cpp
-    REF azure-core_1.8.0
-    SHA512 13d49b79dbc9e5c2fd8ce019e76b2ba92258174f7b12945eae67c7451548ada4afc059023b5092c3de7ce77bc4bb0954a5c483b8451aeefde4a3133401ace632
+    REF "azure-core_${VERSION}"
+    SHA512 e24c4d2b90fa83e108b5e87242265eea8da3be6441e8cbdaf652c417c292f38af52c23d5e1d142f8ffc99c8b3334f4c3cbc0874fb70115ae3b5197ff4f52acdd
+    HEAD_REF main
 )
 
 vcpkg_check_features(
@@ -12,11 +16,23 @@ vcpkg_check_features(
         winhttp BUILD_TRANSPORT_WINHTTP
 )
 
+if(EXISTS "${SOURCE_PATH}/sdk/core/azure-core")
+  file(REMOVE_RECURSE "${SOURCE_PATH}/sdk/core/_")
+  file(REMOVE_RECURSE "${SOURCE_PATH}/sdk/_")
+  file(REMOVE_RECURSE "${SOURCE_PATH}/_")
+
+  file(RENAME "${SOURCE_PATH}/sdk/core/azure-core" "${SOURCE_PATH}/sdk/core/_")
+  file(RENAME "${SOURCE_PATH}/sdk/core" "${SOURCE_PATH}/sdk/_")
+  file(RENAME "${SOURCE_PATH}/sdk" "${SOURCE_PATH}/_")
+endif()
+
 vcpkg_cmake_configure(
-    SOURCE_PATH ${SOURCE_PATH}/sdk/core/azure-core/
+    SOURCE_PATH "${SOURCE_PATH}/_/_/_"
     OPTIONS
         ${FEATURE_OPTIONS}
         -DWARNINGS_AS_ERRORS=OFF
+        -DBUILD_TESTING=OFF
+        -DNO_AUTOMATIC_TRANSPORT_BUILD=ON
 )
 
 vcpkg_cmake_install()

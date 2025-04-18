@@ -5,21 +5,28 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO google/googletest
-    REF release-1.12.1
-    SHA512 a9104dc6c53747e36e7dd7bb93dfce51a558bd31b487a9ef08def095518e1296da140e0db263e0644d9055dbd903c0cb69380cb2322941dbfb04780ef247df9c
+    REF "v${VERSION}"
+    SHA512 bec8dad2a5abbea8e9e5f0ceedd8c9dbdb8939e9f74785476b0948f21f5db5901018157e78387e106c6717326558d6642fc0e39379c62af57bf1205a9df8a18b
     HEAD_REF main
     PATCHES
+        001-fix-UWP-death-test.patch
         clang-tidy-no-lint.patch
         fix-main-lib-path.patch
 )
 
 string(COMPARE EQUAL "${VCPKG_CRT_LINKAGE}" "dynamic" GTEST_FORCE_SHARED_CRT)
 
+set(GTEST_USE_CXX17_OPTION "")
+if("cxx17" IN_LIST FEATURES)
+    set(GTEST_USE_CXX17_OPTION "-DCMAKE_CXX_STANDARD=17")
+endif()
+
 vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
     OPTIONS
         -DBUILD_GMOCK=ON
         -Dgtest_force_shared_crt=${GTEST_FORCE_SHARED_CRT}
+        ${GTEST_USE_CXX17_OPTION}
 )
 
 vcpkg_cmake_install()

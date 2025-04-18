@@ -1,7 +1,7 @@
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/getsentry/sentry-native/releases/download/0.5.4/sentry-native.zip"
-    FILENAME "sentry-native-0.5.4.zip"
-    SHA512 847771de9e8a0fda5e1a35131d25459a117fc41c2e827bc369d249cc6f8a195f1e8e9280ca68c24b5d3c51b91060cd5d528e529d9672332c58c63817ad8a1f3a
+    URLS "https://github.com/getsentry/sentry-native/releases/download/${VERSION}/sentry-native.zip"
+    FILENAME "sentry-native-${VERSION}.zip"
+    SHA512 0b33aa400303f78107883fde9e6a10d29d1b1847c71a8e0b5047603f8ad6ba48cf44b8ad74f90ca7fc2199b5a110992b76861f88108bc7433e10825f2c656ee8
 )
 
 vcpkg_extract_source_archive(
@@ -9,8 +9,8 @@ vcpkg_extract_source_archive(
     ARCHIVE "${ARCHIVE}"
     NO_REMOVE_ONE_LEVEL
     PATCHES
-        fix-warningC5105.patch
-        fix-config-cmake.patch
+        fix-crashpad-wer.patch
+        fix-usage-runtime.patch
 )
 file(REMOVE_RECURSE "${SOURCE_PATH}/external/crashpad/third_party/zlib/zlib")
 
@@ -18,6 +18,8 @@ vcpkg_list(SET options)
 
 if(NOT "backend" IN_LIST FEATURES)
     vcpkg_list(APPEND options "-DSENTRY_BACKEND=none")
+elseif("wer" IN_LIST FEATURES)
+    vcpkg_list(APPEND options "-DSENTRY_BACKEND=crashpad")
 elseif(DEFINED SENTRY_BACKEND)
     # Legacy, possible override from triplet, but cannot handle dependencies
     vcpkg_list(APPEND options "-DSENTRY_BACKEND=${SENTRY_BACKEND}")
@@ -25,6 +27,14 @@ endif()
 
 if(NOT "transport" IN_LIST FEATURES)
     vcpkg_list(APPEND options "-DSENTRY_TRANSPORT=none")
+endif()
+
+if("wer" IN_LIST FEATURES)
+    vcpkg_list(APPEND options "-DSENTRY_TRANSPORT_CRASHPAD_USE_WER=ON")
+endif()
+
+if("compression" IN_LIST FEATURES)
+    vcpkg_list(APPEND options "-DSENTRY_TRANSPORT_COMPRESSION=ON")
 endif()
 
 if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
@@ -56,3 +66,4 @@ if(EXISTS "${CURRENT_PACKAGES_DIR}/bin/crashpad_handler${VCPKG_TARGET_EXECUTABLE
 endif()
 
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")

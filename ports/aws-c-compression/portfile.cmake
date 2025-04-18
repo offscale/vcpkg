@@ -2,7 +2,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO awslabs/aws-c-compression
     REF "v${VERSION}"
-    SHA512 6ca0a29ed97f3f83cce9d106d56a1ae7a9034caa63bfb3cdb29bb1ac4906738a940ffb0b85dede821ef0878bba7b2e9f5e627ae0d3acd99b24979e6567e5e6ae
+    SHA512 02c569751c55b95032bef9b718ca8e2b66b4bd85355f31623ab65621373ec39999231d0a1ceb4fe5f83aa42b9c1d153ffb36ccadfb86f78ad43246d26532cc97
     HEAD_REF master
 )
 
@@ -16,8 +16,8 @@ vcpkg_cmake_configure(
 vcpkg_cmake_install()
 
 string(REPLACE "dynamic" "shared" subdir "${VCPKG_LIBRARY_LINKAGE}")
-vcpkg_cmake_config_fixup(CONFIG_PATH "lib/${PORT}/cmake/${subdir}" DO_NOT_DELETE_PARENT_CONFIG_PATH)
-vcpkg_cmake_config_fixup(CONFIG_PATH "lib/${PORT}/cmake")
+vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/${PORT}/${subdir}" DO_NOT_DELETE_PARENT_CONFIG_PATH)
+vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/${PORT}")
 vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/share/${PORT}/${PORT}-config.cmake" [[/${type}/]] "/")
 
 file(REMOVE_RECURSE

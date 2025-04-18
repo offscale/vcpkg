@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO ornladios/ADIOS2 
-    REF 473fe8c7d1a13c0746910361aa45ee1b96f57bfb
-    SHA512 ef8af30419cf57183b52ce9cb29613a381b06e16848a6d22d83c751c43b8485e504be90cead1381adcc92bb8d4912611083cd6d0b73d161b33f779231a041e6c
+    REPO ornladios/ADIOS2
+    REF "v${VERSION}"
+    SHA512 05decc3ff14e7458df9ec16ca6230a9770ca992e7d0ce3a18b3c9295a19dad94d8a9367102e50347a9487c6a3f35a8d52fbaa6a6fd98807aaec9636e607541ee
     HEAD_REF master
 )
 
@@ -11,14 +11,15 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
         mpi     ADIOS2_USE_MPI
         cuda    ADIOS2_USE_CUDA
         python  ADIOS2_USE_Python # requires numpy / mpi4py; so not exposed in the manifest yet
+        zfp     ADIOS2_USE_ZFP
 )
 
 set(disabled_options "")
-list(APPEND disabled_options ZFP SZ LIBPRESSIO MGARD DAOS DataMan DataSpaces MHS SST BP5 IME Fortran SysVShMem Profiling)
+list(APPEND disabled_options SZ LIBPRESSIO MGARD DAOS DataMan DataSpaces MHS SST BP5 IME Fortran SysVShMem Profiling)
 list(TRANSFORM disabled_options PREPEND "-DADIOS2_USE_")
 list(TRANSFORM disabled_options APPEND  ":BOOL=OFF")
 set(enabled_options "")
-list(APPEND enabled_options BZip2 Blosc PNG ZeroMQ HDF5 Endian_Reverse Sodium)
+list(APPEND enabled_options BZip2 Blosc2 PNG ZeroMQ HDF5 Endian_Reverse Sodium)
 list(TRANSFORM enabled_options PREPEND "-DADIOS2_USE_")
 list(TRANSFORM enabled_options APPEND  ":BOOL=OFF")
 

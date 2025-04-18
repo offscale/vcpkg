@@ -2,8 +2,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO syoyo/tinygltf
-    REF v2.5.0
-    SHA512 f0e9c3f385deaf3c803edea05602da1cbf173e42c6946ec06b0ec6145f7f258a2429921a1c9baf0ca48353219fedeedfe4ad4516429c970ec4c27d7538873003
+    REF "v${VERSION}"
+    SHA512 45317d84c1cb008838d784ccc654ffa20f9f62e20c8cef0796839ce755f144b2f41ddbda77d7e89817536c3ce4e6860742e7b2f1abb492c359b9d876a1433154
     HEAD_REF master
 )
 
@@ -12,4 +12,4 @@ vcpkg_from_github(
 vcpkg_replace_string("${SOURCE_PATH}/tiny_gltf.h" "#include \"json.hpp\"" "#include <nlohmann/json.hpp>")
 file(INSTALL "${SOURCE_PATH}/tiny_gltf.h" DESTINATION "${CURRENT_PACKAGES_DIR}/include")
 
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

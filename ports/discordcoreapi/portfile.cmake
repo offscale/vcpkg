@@ -3,14 +3,23 @@ if(VCPKG_TARGET_IS_LINUX)
 endif()
 
 vcpkg_from_github(
-	OUT_SOURCE_PATH SOURCE_PATH
-	REPO RealTimeChris/DiscordCoreAPI
-	REF c8d4698d2c0ee818def85d63562585a218b2da70
-	SHA512 82a2bada44d1e2c2cc4638b885011a95189febd77bc4d3c26ce8c25005b8202d6c7cbb1f580dbcc1556dd0919f33cfb25127774f37cea17a544fbe31970618b5
-	HEAD_REF main
-    PATCHES
-        0001-Add-extern-C-to-avcodec.patch
+    OUT_SOURCE_PATH SOURCE_PATH
+    REPO RealTimeChris/DiscordCoreAPI
+    REF "v${VERSION}"
+    SHA512 d977ed7d8805f0b110450d3baf0256eae11ecc25947496c657a9c9b17aa9222db92435f28ebd924c166927e4714b3e9ae388f64836175cc96b78b08315031ede
+    HEAD_REF main
 )
+
+# discordcoreapi consumes extreme amounts of memory (>9GB per .cpp file). With our default
+# concurrency values this causes hanging and/or OOM killing on Linux build machines and
+# warnings on the Windows machines like:
+# #[warning]Free memory is lower than 5%; Currently used: 99.99%
+# #[warning]Free memory is lower than 5%; Currently used: 99.99%
+# #[warning]Free memory is lower than 5%; Currently used: 99.99%
+# Cut the requested concurrency in quarter to avoid this.
+if(VCPKG_CONCURRENCY GREATER 4)
+    math(EXPR VCPKG_CONCURRENCY "${VCPKG_CONCURRENCY} / 4")
+endif()
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
@@ -26,8 +35,4 @@ if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
     file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")
 endif()
 
-file(
-	INSTALL "${SOURCE_PATH}/License.md"
-	DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
-	RENAME copyright
-)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/License.md")

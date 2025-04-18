@@ -17,9 +17,9 @@ vcpkg_list(SET OPTIONS)
 
 if(VCPKG_LIBRARY_LINKAGE STREQUAL "dynamic")
     list(APPEND OPTIONS
-        --with-shared
         --with-cxx-shared
-        --without-normal
+        --with-shared    # "lib model"
+        --without-normal # "lib model"
     )
 endif()
 
@@ -46,17 +46,12 @@ vcpkg_configure_make(
         --disable-db-install
         --enable-pc-files
         --without-ada
+        --without-debug # "lib model"
         --without-manpages
         --without-progs
         --without-tack
         --without-tests
         --with-pkg-config-libdir=libdir
-    OPTIONS_DEBUG
-        --with-debug
-        --without-normal
-    OPTIONS_RELEASE
-        --without-debug
-        --with-normal
 )
 vcpkg_install_make()
 
@@ -68,4 +63,4 @@ file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
-file(INSTALL "${SOURCE_PATH}/COPYING" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")

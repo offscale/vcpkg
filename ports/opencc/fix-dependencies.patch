@@ -1,14 +1,23 @@
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 11d14e4..0fa3e1e 100644
+index 7768c89..70292d6 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -137,6 +137,21 @@ set_target_properties(
-       1.1
+@@ -115,7 +115,7 @@ add_library(libopencc ${LIBOPENCC_SOURCES} ${LIBOPENCC_HEADERS})
+ add_library(OpenCC::OpenCC ALIAS libopencc)
+ set_target_properties(libopencc PROPERTIES POSITION_INDEPENDENT_CODE ON)
+ source_group(libopencc FILES ${LIBOPENCC_SOURCES} ${LIBOPENCC_HEADERS})
+-target_link_libraries(libopencc marisa)
++target_link_libraries(libopencc ${LIBMARISA})
+ target_include_directories(libopencc PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+     $<INSTALL_INTERFACE:${DIR_INCLUDE}/opencc>
+@@ -144,6 +144,21 @@ set_target_properties(
+       ${OPENCC_VERSION_MAJOR}.${OPENCC_VERSION_MINOR}
  )
  
 +if(USE_SYSTEM_RAPIDJSON)
 +  find_package(RapidJSON CONFIG REQUIRED)
-+  target_link_libraries(libopencc PRIVATE rapidjson)
++  target_link_libraries(libopencc rapidjson)
 +endif()
 +
 +if(USE_SYSTEM_TCLAP)
@@ -23,4 +32,4 @@ index 11d14e4..0fa3e1e 100644
 +
  # Installation
  
- install(
+ if (USE_SYSTEM_MARISA)

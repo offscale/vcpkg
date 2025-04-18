@@ -1,8 +1,8 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO nodejs/node-addon-api
-  REF v5.0.0
-  SHA512 5ee14bc325ce66c6f645c3b638efaf69a7dfc90f0d6514f8568dedf34d5b5460b80c4438c4c12264d80c827edf46a82f0ecceb53b2a370ed5ec2ee640fa1ef7f
+  REF "v${VERSION}"
+  SHA512 15e365f284c921e3d0464be645addae0b92b4500d4e58e4fd8a5b10aa7a79a49c9f4231bd61fb0982c2df3eb9d495d91e9961108bc92911413f0cffbec93d3a2
   HEAD_REF main
 )
 

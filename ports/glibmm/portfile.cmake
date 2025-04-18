@@ -1,9 +1,9 @@
 # Glib uses winapi functions not available in WindowsStore
-
+string(REGEX MATCH "^([0-9]*[.][0-9]*)" GLIBMM_MAJOR_MINOR "${VERSION}")
 vcpkg_download_distfile(GLIBMM_ARCHIVE
-    URLS "https://ftp.gnome.org/pub/GNOME/sources/glibmm/2.74/glibmm-2.74.0.tar.xz"
-    FILENAME "glibmm-2.74.0.tar.xz"
-    SHA512 29c16a6c921fb135721c39b5328e0b45e09c500c65175199c1ec5ee75bdd5fb907072389c6980da3bf8fac0846235af5580f692706eb00d26947804daa1c99c9
+    URLS "https://ftp.gnome.org/pub/GNOME/sources/glibmm/${GLIBMM_MAJOR_MINOR}/glibmm-${VERSION}.tar.xz"
+    FILENAME "glibmm-${VERSION}.tar.xz"
+    SHA512 6f9ee91212077f3712a5ba99507479b5c99d021670e6bf298afc7239fafed8a40b3b17bfae96d9a7fa7fb199c3994b81b433c8275afe89839229a1fe20ba791e
 )
 
 vcpkg_extract_source_archive(
@@ -32,5 +32,4 @@ vcpkg_fixup_pkgconfig()
 # Handle copyright and readmes
 file(INSTALL "${SOURCE_PATH}/COPYING" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
 file(INSTALL "${SOURCE_PATH}/README.md" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME readme.txt)
-file(INSTALL "${SOURCE_PATH}/README.SUN" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
-file(INSTALL "${SOURCE_PATH}/README.win32" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
+file(INSTALL "${SOURCE_PATH}/README.win32.md" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")

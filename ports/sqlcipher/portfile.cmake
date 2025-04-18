@@ -3,8 +3,8 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO sqlcipher/sqlcipher
-    REF v4.5.2
-    SHA512 1de5b219392bb976631857e32b4523258fd660fedb558d478e536b7e10c711c72c7e7c9062e45bd8a5ceaecbc1fee717935d2357f6811c3ddf76702167f4601b
+    REF "v${VERSION}"
+    SHA512 023b2fc7248fe38b758ef93dd8436677ff0f5d08b1061e7eab0adb9e38ad92d523e0ab69016ee69bd35c1fd53c10f61e99b01f7a2987a1f1d492e1f7216a0a9c
     HEAD_REF master
 )
 
@@ -18,9 +18,9 @@ file(GLOB TCLSH_CMD
 file(TO_NATIVE_PATH "${TCLSH_CMD}" TCLSH_CMD)
 file(TO_NATIVE_PATH "${SOURCE_PATH}" SOURCE_PATH_NAT)
 
-# Determine TCL version (e.g. [path]tclsh90s.exe -> 90)
+# Determine TCL version (e.g. [path]tclsh90sx.exe -> 90)
 string(REGEX REPLACE ^.*tclsh "" TCLVERSION ${TCLSH_CMD})
-string(REGEX REPLACE [A-Za-z]?${VCPKG_HOST_EXECUTABLE_SUFFIX}$ "" TCLVERSION ${TCLVERSION})
+string(REGEX REPLACE [A-Za-z]*${VCPKG_HOST_EXECUTABLE_SUFFIX}$ "" TCLVERSION ${TCLVERSION})
 
 list(APPEND NMAKE_OPTIONS
 		TCLSH_CMD="${TCLSH_CMD}"
@@ -49,15 +49,16 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION "${SOURCE_PATH}")
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
     FEATURES
-    geopoly WITH_GEOPOLY
-    json1 WITH_JSON1
+        geopoly WITH_GEOPOLY
+        json1 WITH_JSON1
+        fts5 WITH_FTS5
     INVERTED_FEATURES
-    tool SQLITE3_SKIP_TOOLS
+        tool SQLITE3_SKIP_TOOLS
 )
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
-    OPTIONS ${FEATURE_OPTIONS}
+    OPTIONS ${FEATURE_OPTIONS} -DSQLCIPHER_VERSION=${VERSION}
     OPTIONS_DEBUG
         -DSQLITE3_SKIP_TOOLS=ON
 )
@@ -77,7 +78,8 @@ configure_file(
     @ONLY
 )
 
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+file(INSTALL "${SOURCE_PATH}/LICENSE.md" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
 
 vcpkg_copy_pdbs()
 vcpkg_copy_tool_dependencies("${CURRENT_PACKAGES_DIR}/tools/${PORT}")
+vcpkg_fixup_pkgconfig()

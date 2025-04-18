@@ -1,11 +1,19 @@
 {
   "name": "qt5-base",
-  "version": "5.15.8",
-  "port-version": 3,
-  "description": "Qt5 Application Framework Base Module. Includes Core, GUI, Widgets, Networking, SQL, Concurrent and other essential qt components.",
+  "version": "5.15.16",
+  "port-version": 2,
+  "description": "Qt Base provides the basic non-GUI functionality required by all Qt applications.",
   "homepage": "https://www.qt.io/",
   "license": null,
   "dependencies": [
+    {
+      "name": "at-spi2-core",
+      "platform": "linux"
+    },
+    {
+      "name": "dbus",
+      "platform": "linux"
+    },
     "double-conversion",
     "egl-registry",
     {
@@ -14,18 +22,16 @@
     },
     "freetype",
     "harfbuzz",
-    {
-      "name": "icu",
-      "platform": "!uwp"
-    },
     "libjpeg-turbo",
     "libpng",
     {
       "name": "opengl",
       "platform": "!windows"
     },
-    "openssl",
-    "pcre2",
+    {
+      "name": "pcre2",
+      "default-features": false
+    },
     {
       "name": "qt5-base",
       "host": true,
@@ -43,7 +49,19 @@
     "zlib",
     "zstd"
   ],
+  "default-features": [
+    "openssl"
+  ],
   "features": {
+    "icu": {
+      "description": "Enable ICU support",
+      "dependencies": [
+        {
+          "name": "icu",
+          "platform": "!uwp"
+        }
+      ]
+    },
     "latest": {
       "description": "(deprecated)"
     },
@@ -51,6 +69,12 @@
       "description": "Build the sql plugin for connecting to mysql databases",
       "dependencies": [
         "libmysql"
+      ]
+    },
+    "openssl": {
+      "description": "Build with OpenSSL support",
+      "dependencies": [
+        "openssl"
       ]
     },
     "postgresqlplugin": {

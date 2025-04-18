@@ -3,10 +3,13 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO boostorg/logic
-    REF boost-1.81.0
-    SHA512 c21e4be1a61e711810300269fb5d6594efc5d773f92d7796bcc1c1c4e121d41d5f6cc3bdd7ff90afa286bff54890b5f8992c1d27ea589f60a2f7caae43a044bc
+    REF boost-${VERSION}
+    SHA512 74564a1ce3c9ba510f53f31ef8b9cb2a38e4397dc9d6970b9d6745d47a59e2cb3a6860e397005f3ea00c158c6dcc1b1d2766b0b8d93650dbd8baf9a12093948f
     HEAD_REF master
 )
 
-include(${CURRENT_INSTALLED_DIR}/share/boost-vcpkg-helpers/boost-modular-headers.cmake)
-boost_modular_headers(SOURCE_PATH ${SOURCE_PATH})
+set(FEATURE_OPTIONS "")
+boost_configure_and_install(
+    SOURCE_PATH "${SOURCE_PATH}"
+    OPTIONS ${FEATURE_OPTIONS}
+)

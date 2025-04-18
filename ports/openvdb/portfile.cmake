@@ -1,10 +1,10 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO AcademySoftwareFoundation/openvdb
-    REF be0e7a78861d2b7d9643f7a0cab04f3ab5951686 # v10.0.0
-    SHA512 92301bf675d700fedb0a2b3c4653158eeda6105e70623e5e4bda15d73391427cf0295a0426204888e2fe062847025542717bff34ceb923e51cffa1721e9d4105
+    REF "v${VERSION}"
+    SHA512 7ea2997afa99ed1ed23422eb8b8420c7127c913432f94043ccf559b6720bba2f6e19376e955d8d9055ab765a821749936966f6e5925b9d36febaa724d866b90a
     PATCHES
-        0003-fix-cmake.patch
+        fix_cmake.patch
 )
 
 file(REMOVE "${SOURCE_PATH}/cmake/FindTBB.cmake")
@@ -15,21 +15,22 @@ file(REMOVE "${SOURCE_PATH}/cmake/FindOpenEXR.cmake")
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "static" OPENVDB_STATIC)
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" OPENVDB_SHARED)
 
-set(OPENVDB_BUILD_TOOLS OFF)
-if ("tools" IN_LIST FEATURES)
-  if (VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
-    set(OPENVDB_BUILD_TOOLS ON)
-  else()
-    message(FATAL_ERROR "Unable to build tools if static libraries are required")
-  endif()
-endif()
+vcpkg_check_features(
+    OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+    FEATURES
+        "tools" OPENVDB_BUILD_TOOLS
+        "ax"    OPENVDB_BUILD_AX
+        "nanovdb" OPENVDB_BUILD_NANOVDB
+        "nanovdb-tools" NANOVDB_BUILD_TOOLS
+)
 
-if ("ax" IN_LIST FEATURES)
-  if(NOT VCPKG_TARGET_IS_WINDOWS)
-    set(OPENVDB_BUILD_AX ON)
-  else()
-    message(FATAL_ERROR "Currently no support for building OpenVDB AX on Windows.")  
-  endif()
+if (OPENVDB_BUILD_NANOVDB)
+    set(NANOVDB_OPTIONS
+    -DNANOVDB_USE_INTRINSICS=ON
+    -DNANOVDB_USE_CUDA=ON
+    -DNANOVDB_CUDA_KEEP_PTX=ON
+    -DNANOVDB_USE_OPENVDB=ON
+)
 endif()
 
 vcpkg_cmake_configure(
@@ -37,9 +38,8 @@ vcpkg_cmake_configure(
     OPTIONS
         -DOPENVDB_BUILD_UNITTESTS=OFF
         -DOPENVDB_BUILD_PYTHON_MODULE=OFF
-        -DOPENVDB_ENABLE_3_ABI_COMPATIBLE=OFF
+        -DOPENVDB_3_ABI_COMPATIBLE=OFF
         -DUSE_EXR=ON
-        -DUSE_GLFW3=ON
         -DUSE_IMATH_HALF=ON
         -DOPENVDB_CORE_STATIC=${OPENVDB_STATIC}
         -DOPENVDB_CORE_SHARED=${OPENVDB_SHARED}
@@ -48,7 +48,12 @@ vcpkg_cmake_configure(
         -DOPENVDB_BUILD_VDB_RENDER=${OPENVDB_BUILD_TOOLS}
         -DOPENVDB_BUILD_VDB_LOD=${OPENVDB_BUILD_TOOLS}
         -DUSE_PKGCONFIG=OFF
-        ${OPENVDB_BUILD_AX}
+        ${FEATURE_OPTIONS}
+        -DUSE_EXPLICIT_INSTANTIATION=OFF
+        ${NANOVDB_OPTIONS}
+    MAYBE_UNUSED_VARIABLES
+        OPENVDB_3_ABI_COMPATIBLE
+        OPENVDB_BUILD_TOOLS
 )
 
 vcpkg_cmake_install()
@@ -63,6 +68,10 @@ if (OPENVDB_BUILD_TOOLS)
     vcpkg_copy_tools(TOOL_NAMES vdb_print vdb_render vdb_view vdb_lod AUTO_CLEAN)
 endif()
 
+if (NANOVDB_BUILD_TOOLS)
+    vcpkg_copy_tools(TOOL_NAMES nanovdb_convert nanovdb_print nanovdb_validate AUTO_CLEAN)
+endif()
+
 configure_file("${CMAKE_CURRENT_LIST_DIR}/vcpkg-cmake-wrapper.cmake.in" "${CURRENT_PACKAGES_DIR}/share/${PORT}/vcpkg-cmake-wrapper.cmake" @ONLY)
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
-file(INSTALL "${SOURCE_PATH}/openvdb/openvdb/COPYRIGHT" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/openvdb/openvdb/COPYRIGHT")

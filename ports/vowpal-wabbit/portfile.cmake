@@ -3,10 +3,13 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO VowpalWabbit/vowpal_wabbit
-    REF 16e9114f41343eed0a5f3f9881b171ce4ea6774a
-    SHA512 a9244c9791d672f57e06cafc0de753c307976f35f975b6f17ac0e5f8f773f4236674232afada015cd47c4ee2e4d0f550680251772693d4abf2b525dd9b3617f5
+    REF "${VERSION}"
+    SHA512 f87229caf65c6c32fb863fa426a39592d41990a43ce4d79f0a076323e47cd3d1a8bd02884afceb662527c87d290e68c51df6263d6a97f3a044f3f7254a38f86a
     HEAD_REF master
-    PATCHES cmake_remove_bin_targets.patch
+    PATCHES
+        cmake_remove_bin_targets.patch
+        fix-build-error-with-fmt11.patch
+        fix-rapidjson-target.patch
 )
 
 vcpkg_cmake_configure(
@@ -21,12 +24,15 @@ vcpkg_cmake_configure(
         -DVW_EIGEN_SYS_DEP=ON
         -DVW_BUILD_VW_C_WRAPPER=OFF
         -DBUILD_TESTING=OFF
+        -DVW_STRING_VIEW_LITE_SYS_DEP=ON
+        -DVW_SSE2NEON_SYS_DEP=ON
+        -DVW_CXX_STANDARD=14 # boost-math require c++14
 )
 vcpkg_cmake_install()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
 
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/VowpalWabbit)
 vcpkg_fixup_pkgconfig()

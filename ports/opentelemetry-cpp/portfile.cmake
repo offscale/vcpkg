@@ -6,10 +6,11 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO open-telemetry/opentelemetry-cpp
     REF "v${VERSION}"
-    SHA512 5d3efb7c31626acd9655b795da497ef3829a88f1e33532f26d011fda01ec41e08e88539900151224f5c19161d9bc1f76e502f14a358c4e01440d832432cd0c0b
+    SHA512 db9745be96907431c32a69230b29a5bddba0654f3f379f6cd0827f44895ef39c9612381303ec239d6ad98920bcc4006a90e25b715ade9ddf30aff843d1931416
     HEAD_REF main
     PATCHES
-        support_absl_cxx17.patch
+        cmake-quirks.diff
+        fix-target_link.patch
 )
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
@@ -18,19 +19,22 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
         zipkin WITH_ZIPKIN
         prometheus WITH_PROMETHEUS
         elasticsearch WITH_ELASTICSEARCH
-        jaeger WITH_JAEGER
-        otlp WITH_OTLP
         otlp-http WITH_OTLP_HTTP
-        zpages WITH_ZPAGES
+        otlp-grpc WITH_OTLP_GRPC
+        geneva WITH_GENEVA
+        user-events WITH_USER_EVENTS
+        opentracing WITH_OPENTRACING
+    INVERTED_FEATURES
+        user-events BUILD_TRACEPOINTS
 )
 
 # opentelemetry-proto is a third party submodule and opentelemetry-cpp release did not pack it.
-if(WITH_OTLP)
-    set(OTEL_PROTO_VERSION "0.19.0")
+if(WITH_OTLP_GRPC OR WITH_OTLP_HTTP)
+    set(OTEL_PROTO_VERSION "1.5.0")
     vcpkg_download_distfile(ARCHIVE
         URLS "https://github.com/open-telemetry/opentelemetry-proto/archive/v${OTEL_PROTO_VERSION}.tar.gz"
         FILENAME "opentelemetry-proto-${OTEL_PROTO_VERSION}.tar.gz"
-        SHA512 b6d47aaa90ff934eb24047757d5fdb8a5be62963a49b632460511155f09a725937fb7535cf34f738b81cc799600adbbc3809442aba584d760891c0a1f0ce8c03
+        SHA512 8a3f95543c6093300f0c54f31bf050137d0c6f1d867a7cda7af066b83572643e636b33a9b53e297f8c309bc262dde63cf7c10f515e0fe0cbbce1d12fafbe2482
     )
 
     vcpkg_extract_source_archive(src ARCHIVE "${ARCHIVE}")
@@ -38,6 +42,33 @@ if(WITH_OTLP)
     file(COPY "${src}/." DESTINATION "${SOURCE_PATH}/third_party/opentelemetry-proto")
     # Create empty .git directory to prevent opentelemetry from cloning it during build time
     file(MAKE_DIRECTORY "${SOURCE_PATH}/third_party/opentelemetry-proto/.git")
+    list(APPEND FEATURE_OPTIONS -DCMAKE_CXX_STANDARD=14)
+    list(APPEND FEATURE_OPTIONS "-DgRPC_CPP_PLUGIN_EXECUTABLE=${CURRENT_HOST_INSTALLED_DIR}/tools/grpc/grpc_cpp_plugin${VCPKG_HOST_EXECUTABLE_SUFFIX}")
+endif()
+
+set(OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS "OFF")
+
+if(WITH_GENEVA OR WITH_USER_EVENTS)
+    # Geneva and user events exporters from opentelemetry-cpp-contrib are tightly coupled with opentelemetry-cpp repo, 
+    # so they should be ported as a feature under opentelemetry-cpp.
+    clone_opentelemetry_cpp_contrib(CONTRIB_SOURCE_PATH)
+    
+    if(WITH_GENEVA)
+        set(OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS "${CONTRIB_SOURCE_PATH}/exporters/geneva")
+        if(VCPKG_TARGET_IS_WINDOWS)
+            set(OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS "${OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS}\;${CONTRIB_SOURCE_PATH}/exporters/geneva-trace")
+        else()
+            set(OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS "${OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS}\;${CONTRIB_SOURCE_PATH}/exporters/fluentd")
+        endif()
+    endif()
+
+    if(WITH_USER_EVENTS)
+        if(WITH_GENEVA)
+            set(OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS "${OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS}\;${CONTRIB_SOURCE_PATH}/exporters/user_events")
+        else()
+            set(OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS "${CONTRIB_SOURCE_PATH}/exporters/user_events")
+        endif()
+    endif()
 endif()
 
 vcpkg_cmake_configure(
@@ -45,14 +76,21 @@ vcpkg_cmake_configure(
     OPTIONS
         -DBUILD_TESTING=OFF
         -DWITH_EXAMPLES=OFF
-        -DWITH_LOGS_PREVIEW=ON
+        -DOPENTELEMETRY_INSTALL=ON
+        -DWITH_ABSEIL=ON
+        -DWITH_BENCHMARK=OFF
+        -DOPENTELEMETRY_EXTERNAL_COMPONENT_PATH=${OPENTELEMETRY_CPP_EXTERNAL_COMPONENTS}
         ${FEATURE_OPTIONS}
+    MAYBE_UNUSED_VARIABLES
+        WITH_GENEVA
+        WITH_USER_EVENTS
+        BUILD_TRACEPOINTS
 )
 
 vcpkg_cmake_install()
-vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/${PORT})
+vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/${PORT}")
 vcpkg_copy_pdbs()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

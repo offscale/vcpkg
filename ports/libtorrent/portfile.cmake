@@ -30,8 +30,8 @@ endif()
 vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
         REPO arvidn/libtorrent
-        REF 64817e0e8793d0875fc10245de52ffb2540a223d # v2.0.8
-        SHA512 607172e6a806d78bb34443101bd384ac7a42e0edc3e7c4a2cf5c3ab5f2be64f84557726dce16c2fbaaa2ba254529a8871b3123b0e79fe87cd5bf26021ecb59da
+        REF "v${VERSION}"
+        SHA512 375fb12754ce73b34b215c1ca077b0ec58a8c91f6a6e4a48e2ae55251be38f647405d135ebeae38f8b0dfb478bcea8d5f0d6509e97f1baddbc2cd2e788948f2a
         HEAD_REF RC_2_0
 )
 
@@ -78,7 +78,7 @@ vcpkg_cmake_install()
 vcpkg_cmake_config_fixup(PACKAGE_NAME LibtorrentRasterbar CONFIG_PATH lib/cmake/LibtorrentRasterbar)
 
 # Handle copyright
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
 
 # Do not duplicate include files
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include" "${CURRENT_PACKAGES_DIR}/debug/share" "${CURRENT_PACKAGES_DIR}/share/cmake")

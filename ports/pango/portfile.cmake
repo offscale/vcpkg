@@ -4,16 +4,12 @@ vcpkg_from_gitlab(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO GNOME/pango
     REF "${VERSION}"
-    SHA512 30be64784fac2539741c5e085ed0cf515fdd2044e71b6c08121dfb838e50d1a31f4f9e53d9869b65aa1fa246ab5cc1bec18503a08dcf0337aece84290472e336
+    SHA512 c980cfed2a4811c32ba473846d7d075e0b949a833089f4cafb436ce7442719307a60eb68956606c315dd6185cb8753df87d4bac140d752eaeaf0b67b17afbd79
     HEAD_REF master
-    PATCHES
-        freetype2-pc.patch
 ) 
 
+
 if("introspection" IN_LIST FEATURES)
-    if(VCPKG_TARGET_IS_WINDOWS AND VCPKG_LIBRARY_LINKAGE STREQUAL "static")
-        message(FATAL_ERROR "Feature introspection currently only supports dynamic build.")
-    endif()
     list(APPEND OPTIONS_DEBUG -Dintrospection=disabled)
     list(APPEND OPTIONS_RELEASE -Dintrospection=enabled)
 else()
@@ -44,7 +40,7 @@ vcpkg_configure_meson(
     ADDITIONAL_BINARIES
         "glib-genmarshal='${CURRENT_HOST_INSTALLED_DIR}/tools/glib/glib-genmarshal'"
         "glib-mkenums='${CURRENT_HOST_INSTALLED_DIR}/tools/glib/glib-mkenums'"
-        "g-ir-compiler='${CURRENT_HOST_INSTALLED_DIR}/tools/gobject-introspection/g-ir-compiler${VCPKG_HOST_EXECUTABLE_SUFFIX}'"
+        "g-ir-compiler='${GIR_TOOL_DIR}/tools/gobject-introspection/g-ir-compiler${VCPKG_HOST_EXECUTABLE_SUFFIX}'"
         "g-ir-scanner='${GIR_TOOL_DIR}/tools/gobject-introspection/g-ir-scanner'"
 )
 
@@ -54,4 +50,4 @@ vcpkg_copy_pdbs()
 
 vcpkg_copy_tools(TOOL_NAMES pango-view pango-list pango-segmentation AUTO_CLEAN)
 
-file(INSTALL "${SOURCE_PATH}/COPYING" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")
