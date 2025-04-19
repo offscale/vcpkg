@@ -1,6 +1,6 @@
 {
   "name": "c-str-span",
-  "version-date": "2025-04-18",
+  "version-date": "2025-04-19",
   "description": "UTF-8 replacement for C strings, supporting zero-copy use-cases (non-null-terminated)",
   "homepage": "https://github.com/SamuelMarks/c-str-span",
   "license": "MIT",
