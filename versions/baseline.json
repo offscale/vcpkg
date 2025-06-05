@@ -197,7 +197,7 @@
       "port-version": 2
     },
     "arcticdb-sparrow": {
-      "baseline": "0.8.0",
+      "baseline": "0.9.0",
       "port-version": 0
     },
     "arcus": {
@@ -585,7 +585,7 @@
       "port-version": 1
     },
     "baresip-libre": {
-      "baseline": "3.22.0",
+      "baseline": "3.23.0",
       "port-version": 0
     },
     "bark": {
@@ -1533,8 +1533,8 @@
       "port-version": 0
     },
     "calceph": {
-      "baseline": "4.0.4",
-      "port-version": 1
+      "baseline": "4.0.5",
+      "port-version": 0
     },
     "camport3": {
       "baseline": "1.6.2",
@@ -3670,7 +3670,7 @@
     },
     "hidapi": {
       "baseline": "0.15.0",
-      "port-version": 0
+      "port-version": 1
     },
     "highfive": {
       "baseline": "2.10.1",
@@ -5501,7 +5501,7 @@
       "port-version": 0
     },
     "liburing": {
-      "baseline": "2.9",
+      "baseline": "2.10",
       "port-version": 0
     },
     "libusb": {
@@ -5905,7 +5905,7 @@
       "port-version": 1
     },
     "luau": {
-      "baseline": "0.675",
+      "baseline": "0.676",
       "port-version": 0
     },
     "luminoengine": {
@@ -6242,7 +6242,7 @@
     },
     "minizip-ng": {
       "baseline": "4.0.10",
-      "port-version": 0
+      "port-version": 1
     },
     "mio": {
       "baseline": "2023-03-03",
@@ -7397,7 +7397,7 @@
       "port-version": 2
     },
     "podofo": {
-      "baseline": "0.10.4",
+      "baseline": "1.0.0",
       "port-version": 0
     },
     "poissonrecon": {
@@ -8257,7 +8257,7 @@
       "port-version": 0
     },
     "restinio": {
-      "baseline": "0.7.6",
+      "baseline": "0.7.7",
       "port-version": 0
     },
     "resultlib": {
