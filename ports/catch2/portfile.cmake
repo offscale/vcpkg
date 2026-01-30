@@ -6,7 +6,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO catchorg/Catch2
     REF v${VERSION}
-    SHA512 b215216088dbebf0d590351767e71e7643158b26835e3d6dab8c826d8252c4ab09697dd9eaf37d34ad7fc7cc367846bf501ee9489ba3a407ace00ae5d18268ed
+    SHA512 acb3f463a7404d6a3bce52e474075cdadf9bb241d93feaf147c182d756e5a2f8bd412f4658ca186d15ab8fed36fc587d79ec311f55642d8e4ded16df9e213656
     HEAD_REF devel
     PATCHES
         fix-install-path.patch
