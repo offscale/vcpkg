@@ -1561,7 +1561,7 @@
       "port-version": 1
     },
     "c-str-span": {
-      "baseline": "2025-04-19",
+      "baseline": "2026-03-27",
       "port-version": 0
     },
     "c4core": {
@@ -1569,7 +1569,7 @@
       "port-version": 0
     },
     "c89stringutils": {
-      "baseline": "2023-06-17",
+      "baseline": "2026-03-27",
       "port-version": 0
     },
     "c9y": {
