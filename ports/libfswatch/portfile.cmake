@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/fswatch
-    REF             99d52cb74d21e7f09edbcf9b0d0103448f01fd84
-    SHA512          3e97f8bb28352991315916293a0854e3d74b2c473cffe02075c2a0efdb479d56bac02c3e9742bfc9d59a1b43ab4bff69d212cb366c6dc549462a33390618e565
+    REF 6b273e1285cfb6cf6df3fbd4d593a07500184559
+    SHA512 4e13465fb2f51e68e3a37bc894415b3f1474144e12aad00e9c351ede04ad3ed5d58a2988c44d94a5589ec88373f6d80b7367c7b62c00e6f230c71a1f63fa064f
     HEAD_REF        multi-os-ci
 )
 

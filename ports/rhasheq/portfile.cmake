@@ -1,12 +1,19 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO offscale/rhasheq
-    REF cf5442f6468871beb6088991501e6ba052fe4467
-    SHA512 2be63bc32c7cea35eefbcc7186255e9cd8ba6ed4b03cb9ee2e62740fe17ad74a81ee7e4ada37f4a2dca99a82becf790d6aa86822cdbeba3972cf11d54095ca91
+    REF             474c46bf8bef0632082de4b06345a5c52fc8e481
+    SHA512          48f4d32375843d53e49478d0ef7c0a448cc7d4967a551c007ba145a237b52fd443c3dba1af0204a3aee72ce1e425ba6938f54fa10f9e07fc906c504af69c390a
     HEAD_REF master
-    PATCHES
-        find-rhash.patch
 )
+
+vcpkg_replace_string("${SOURCE_PATH}/cmake/Config.cmake.in"
+    "include ( \"\${CMAKE_CURRENT_LIST_DIR}/rhasheqTargets.cmake\" )"
+    "include(CMakeFindDependencyMacro)\nfind_dependency(unofficial-rhash)\ninclude ( \"\${CMAKE_CURRENT_LIST_DIR}/rhasheqTargets.cmake\" )"
+)
+
+file(READ "${SOURCE_PATH}/rhasheq/CMakeLists.txt" CMAKE_LISTS_CONTENT)
+string(REGEX REPLACE "set\\(CMAKE_MODULE_PATH.*LibRHash::LibRHash\"\\)" "target_link_libraries(\"\${LIBRARY_NAME}\" INTERFACE unofficial::rhash::rhash)" CMAKE_LISTS_CONTENT "${CMAKE_LISTS_CONTENT}")
+file(WRITE "${SOURCE_PATH}/rhasheq/CMakeLists.txt" "${CMAKE_LISTS_CONTENT}")
 
 file(REMOVE "${SOURCE_PATH}/cmake/modules/FindLibRHash.cmake")
 

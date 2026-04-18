@@ -1561,7 +1561,7 @@
       "port-version": 1
     },
     "c-str-span": {
-      "baseline": "2026-03-27",
+      "baseline": "2026-04-02",
       "port-version": 0
     },
     "c4core": {
@@ -1569,7 +1569,7 @@
       "port-version": 0
     },
     "c89stringutils": {
-      "baseline": "2026-03-27",
+      "baseline": "2026-03-25",
       "port-version": 0
     },
     "c9y": {
@@ -3361,8 +3361,8 @@
       "port-version": 3
     },
     "getopt-bsd": {
-      "baseline": "0.0.1",
-      "port-version": 1
+      "baseline": "2023-07-01",
+      "port-version": 0
     },
     "getopt-win32": {
       "baseline": "2.42.0",
@@ -3513,11 +3513,11 @@
       "port-version": 0
     },
     "google-cloud-bucket-c": {
-      "baseline": "2022-07-15",
+      "baseline": "2022-07-16",
       "port-version": 0
     },
     "google-cloud-c": {
-      "baseline": "2022-11-23",
+      "baseline": "2023-12-30",
       "port-version": 0
     },
     "google-cloud-cpp": {
@@ -4785,7 +4785,7 @@
       "port-version": 0
     },
     "libcurl-simple-https": {
-      "baseline": "2022-05-09",
+      "baseline": "2022-06-29",
       "port-version": 0
     },
     "libczi": {
@@ -4953,7 +4953,7 @@
       "port-version": 1
     },
     "libfswatch": {
-      "baseline": "1.17.0",
+      "baseline": "2021-12-23",
       "port-version": 0
     },
     "libftdi": {
@@ -7165,8 +7165,8 @@
       "port-version": 0
     },
     "offscale-libetcd-cpp": {
-      "baseline": "2019-07-10",
-      "port-version": 3
+      "baseline": "2019-06-17",
+      "port-version": 0
     },
     "ogre": {
       "baseline": "14.5.2",
@@ -8713,7 +8713,7 @@
       "port-version": 0
     },
     "rhasheq": {
-      "baseline": "2023-06-17",
+      "baseline": "2023-08-03",
       "port-version": 0
     },
     "riffcpp": {
