@@ -5,10 +5,10 @@
   "homepage": "https://github.com/microsoft/vcpkg",
   "license": "MIT",
   "dependencies": [
+    "unixodbc",
     {
       "name": "vcpkg-cmake",
       "host": true
-    },
-    "unixodbc"
+    }
   ]
 }

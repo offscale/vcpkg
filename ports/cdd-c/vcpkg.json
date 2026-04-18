@@ -1,0 +1,24 @@
+{
+  "name": "cdd-c",
+  "version-date": "2026-04-18",
+  "description": "OpenAPI ↔ C. Frontend for C, concentrating on: generation from code; single-file analysis; modification; and emission (prettyprinting).",
+  "homepage": "https://rewriteInC.io",
+  "license": "Apache-2.0",
+  "dependencies": [
+    "c-str-span",
+    "c89stringutils",
+    {
+      "name": "curl",
+      "platform": "!windows"
+    },
+    "parson",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "valkey",
+  "version-date": "2026-04-18",
+  "description": "A flexible distributed key-value database that is optimized for caching and other realtime workloads.",
+  "homepage": "https://valkey.io",
+  "dependencies": [
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

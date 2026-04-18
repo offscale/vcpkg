@@ -95,17 +95,17 @@
           "name": "curl",
           "default-features": false,
           "features": [
-            "gssapi"
+            "sspi"
           ],
-          "platform": "(linux | osx) & !arm"
+          "platform": "windows & !uwp"
         },
         {
           "name": "curl",
           "default-features": false,
           "features": [
-            "sspi"
+            "gssapi"
           ],
-          "platform": "windows & !uwp"
+          "platform": "(linux | osx) & !arm"
         },
         {
           "$comment": "On arm, gnutls crypto symbols clash with openssl.",

@@ -8,13 +8,6 @@
     {
       "name": "itk",
       "features": [
-        "opencv"
-      ],
-      "platform": "arm64 & !windows"
-    },
-    {
-      "name": "itk",
-      "features": [
         "rtk",
         "tools"
       ],
@@ -34,6 +27,13 @@
         "vtk"
       ],
       "platform": "osx | windows"
+    },
+    {
+      "name": "itk",
+      "features": [
+        "opencv"
+      ],
+      "platform": "arm64 & !windows"
     },
     {
       "name": "itk",

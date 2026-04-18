@@ -14,7 +14,6 @@
   ],
   "default-features": [
     {
-      "$comment": "The platform expression is tuned for vcpkg CI.",
       "name": "run-programs",
       "platform": "native | (!android & !arm64)"
     }

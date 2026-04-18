@@ -20,16 +20,16 @@
         {
           "name": "openblas",
           "features": [
-            "dynamic-arch"
+            "threads"
           ],
-          "platform": "linux & !arm"
+          "platform": "!windows"
         },
         {
           "name": "openblas",
           "features": [
-            "threads"
+            "dynamic-arch"
           ],
-          "platform": "!windows"
+          "platform": "linux & !arm"
         }
       ]
     }

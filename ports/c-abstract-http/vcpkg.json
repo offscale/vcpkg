@@ -1,0 +1,82 @@
+{
+  "name": "c-abstract-http",
+  "version-date": "2026-04-18",
+  "description": "HTTP/HTTPS client interface reusing abstractions for Windows (WinHTTP,WinINet), macOS (CommonCrypto), iOS, Android, GTK+4 (libsoup), with fallback to libcurl",
+  "homepage": "https://github.com/SamuelMarks/c-abstract-http",
+  "license": "Apache-2.0",
+  "dependencies": [
+    {
+      "name": "curl",
+      "platform": "!windows & !osx"
+    },
+    "libevent",
+    "libuv",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ],
+  "features": {
+    "bearssl": {
+      "description": "Use BearSSL for cryptography",
+      "dependencies": [
+        "bearssl"
+      ]
+    },
+    "boringssl": {
+      "description": "Use BoringSSL for cryptography",
+      "dependencies": [
+        "boringssl"
+      ]
+    },
+    "botan": {
+      "description": "Use Botan for cryptography",
+      "dependencies": [
+        "botan"
+      ]
+    },
+    "gnutls": {
+      "description": "Use GnuTLS for cryptography",
+      "dependencies": [
+        "gnutls"
+      ]
+    },
+    "libressl": {
+      "description": "Use LibreSSL for cryptography",
+      "dependencies": [
+        "libressl"
+      ]
+    },
+    "mbedtls": {
+      "description": "Use mbedtls for cryptography",
+      "dependencies": [
+        "mbedtls"
+      ]
+    },
+    "openssl": {
+      "description": "Use OpenSSL for cryptography",
+      "dependencies": [
+        "openssl"
+      ]
+    },
+    "s2n": {
+      "description": "Use s2n-tls for cryptography",
+      "dependencies": [
+        "s2n"
+      ]
+    },
+    "schannel": {
+      "description": "Use Schannel for cryptography (Windows Native)"
+    },
+    "wolfssl": {
+      "description": "Use wolfSSL for cryptography",
+      "dependencies": [
+        "wolfssl"
+      ]
+    }
+  }
+}

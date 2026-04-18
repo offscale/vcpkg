@@ -7,9 +7,9 @@
       "name": "libgit2",
       "default-features": false,
       "features": [
+        "sha256",
         "ssh",
-        "tools",
-        "sha256"
+        "tools"
       ]
     }
   ]

@@ -24,6 +24,12 @@
         {
           "name": "fluidsynth",
           "features": [
+            "libinstpatch"
+          ]
+        },
+        {
+          "name": "fluidsynth",
+          "features": [
             "pulseaudio"
           ],
           "platform": "linux"
@@ -34,12 +40,6 @@
             "sndfile"
           ],
           "platform": "!xbox"
-        },
-        {
-          "name": "fluidsynth",
-          "features": [
-            "libinstpatch"
-          ]
         }
       ]
     }

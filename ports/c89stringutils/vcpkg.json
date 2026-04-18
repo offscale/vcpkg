@@ -1,6 +1,6 @@
 {
   "name": "c89stringutils",
-  "version-date": "2026-03-25",
+  "version-date": "2026-04-18",
   "description": "string functions from newer standards / common non-standards for C89",
   "license": "Apache-2.0 OR MIT",
   "supports": "!uwp",

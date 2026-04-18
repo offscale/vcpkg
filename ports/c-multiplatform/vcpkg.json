@@ -1,0 +1,29 @@
+{
+  "name": "c-multiplatform",
+  "version-date": "2026-04-18",
+  "description": "Cross platform GUI framework in ANSI C (C89), native for: Windows (GDI+); Linux (GTK+4); macOS (Cocoa); iOS; Android; web (WASM). Material 3.",
+  "homepage": "https://github.com/SamuelMarks/c-multiplatform",
+  "license": "Apache-2.0",
+  "dependencies": [
+    {
+      "name": "curl",
+      "platform": "linux"
+    },
+    {
+      "name": "openssl",
+      "platform": "linux"
+    },
+    {
+      "name": "sqlite3",
+      "platform": "linux"
+    },
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}
