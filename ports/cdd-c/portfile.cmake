@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/cdd-c
-    REF             133897137b0bf77e60d223e1f60a034d73b06f8b
-    SHA512          da8036156fc6b575c56df5178153b646d95d8083175f92ee1e77969fa214022f009ceacb8ee1ccd44be39eddd083532b854aa8219bf1b347ed0f94205e4ea4f6
+    REF             6325b9b8ae673ab66196d70c0bfda69fb5bc865d
+    SHA512          3f30f2c1063eef954e0a257e9b79675bf65ea5fad1ab158a1f0e32bfc2e1d20b71c0ebbc6d0aea11d08f7330ab36ed9d780366fd02f667df06080a355403ea6f
     HEAD_REF        master
 )
 
@@ -26,3 +26,4 @@ file(INSTALL "${SOURCE_PATH}/LICENSE.txt"
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
+

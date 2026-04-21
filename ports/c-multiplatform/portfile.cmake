@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-multiplatform
-    REF             555356fe65a0d8473c77a8511896661d4ca6b6ca
-    SHA512          feeafc03400b9d7e322f340caf1457e77c410fc4452b3160893a28861aa9d840c97e6837e002cfe8e310d9e6cad8a53e778959441b7915175da264d40da8cb7d
+    REF             54d07b48d60de882d0d41a213a11b41fe8bc4206
+    SHA512          42f00e337affafc761e6116c5c5a379de65d4397775d3fbae9e0b06057b3d477e9334de9b5f977ac74fddcae9f8e36a233b34f477a5f46c98554b781e8196608
     HEAD_REF        master
 )
 
@@ -26,3 +26,4 @@ file(INSTALL "${SOURCE_PATH}/LICENSE.txt"
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
+

@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-rest-framework
-    REF             0bf7cd2dfc9ddabbadaa3354fba46d167735013b
-    SHA512          0dfdac64fffafd1ebd24363e310b68b6a8bf700241ceca211e3eaf266381c39b45774811123e365b4760ce9163430188c01f6183a29ddea8fe613575b97f5312
+    REF             afba7cb2936467dbf91d50a2bac6daba52ad65ad
+    SHA512          9aee673eaeee7aafabb2845cfa9d5372464a073f567bba91f06b142c765e502a4f606e066679515df51a112cf8a1f5c75e38f3e6f6e92a0834a5942189d32c6b
     HEAD_REF        master
 )
 
@@ -26,3 +26,4 @@ file(INSTALL "${SOURCE_PATH}/LICENSE.txt"
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
+

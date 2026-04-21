@@ -26,3 +26,4 @@ file(INSTALL "${SOURCE_PATH}/LICENSE.txt"
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
+

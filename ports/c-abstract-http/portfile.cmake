@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-abstract-http
-    REF             d82fbf9d32338db1b994991aa8e2664b0451896c
-    SHA512          eba0a85f8802883ad6f6660834a34d4dd89488f8e23ce7466610accc039860fe471301201639da463ab634b4b5bb40d7e4adff644a4c3a373360930f880252e2
+    REF             74ee439cfe4a2a889cc054c185c996aa64eb2ed2
+    SHA512          9d07518d59ba0025e7568811006ca077849c170f50920f545bd2476c88e55f914be92d51ae8c4b306b2e55690741cf9cbd650304fd8b746750a4781791640a76
     HEAD_REF        master
 )
 
@@ -26,3 +26,4 @@ file(INSTALL "${SOURCE_PATH}/LICENSE.txt"
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
+

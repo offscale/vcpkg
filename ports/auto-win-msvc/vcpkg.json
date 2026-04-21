@@ -1,6 +1,6 @@
 {
   "name": "auto-win-msvc",
-  "version-date": "2026-04-18",
+  "version-date": "2026-04-21",
   "description": "Auto-win MSVC with this library+tool for automatically-porting POSIX/Linux/BSD software to the native Microsoft Visual Studio toolchain",
   "homepage": "https://github.com/SamuelMarks/auto-win-msvc",
   "license": "Apache-2.0",

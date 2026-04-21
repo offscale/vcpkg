@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-str-span
-    REF             f063f867b0f8c48737b2bc3673d0bbc07479e42a
-    SHA512          9f2b981b452583f3ce85e821409a4526ac35af93fa873ee932a7ab85e5067cab42e9863a30b3e8d4f6a378be8e44fc5ada34168a35f967b14f3545a88d64ecd8
+    REF             c283e152785a2c0f35c603f81b4684261c0ba496
+    SHA512          b5a6a9c06f0d639fc5dc1929f9e5843930795d4b2a69403a262695d2949d128272e221e07f6db991a11acbb33b4ae0b9996dede3d2257d3176990b47d482d01f
     HEAD_REF        master
 )
 
@@ -17,3 +17,4 @@ file(INSTALL "${SOURCE_PATH}/LICENSE-MIT"
      RENAME copyright)
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
                     "${CURRENT_PACKAGES_DIR}/debug/share")
+
