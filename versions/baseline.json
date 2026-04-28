@@ -417,7 +417,7 @@
       "port-version": 0
     },
     "auto-win-msvc": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "autobahn": {
@@ -1561,7 +1561,7 @@
       "port-version": 0
     },
     "c-abstract-http": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "c-ares": {
@@ -1569,19 +1569,19 @@
       "port-version": 1
     },
     "c-multiplatform": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "c-orm": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "c-rest-framework": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "c-str-span": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "c4core": {
@@ -1589,7 +1589,7 @@
       "port-version": 0
     },
     "c89stringutils": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "c9y": {
@@ -1653,7 +1653,7 @@
       "port-version": 0
     },
     "cauthflow": {
-      "baseline": "2022-11-23",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "cblas": {
@@ -1681,7 +1681,7 @@
       "port-version": 0
     },
     "cdd-c": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "cddlib": {
@@ -3397,7 +3397,7 @@
       "port-version": 3
     },
     "getopt-bsd": {
-      "baseline": "2023-07-01",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "getopt-win32": {
@@ -3549,11 +3549,11 @@
       "port-version": 0
     },
     "google-cloud-bucket-c": {
-      "baseline": "2022-07-16",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "google-cloud-c": {
-      "baseline": "2023-12-30",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "google-cloud-cpp": {
@@ -3609,7 +3609,7 @@
       "port-version": 0
     },
     "greatest": {
-      "baseline": "2026-04-18",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "grpc": {
@@ -4877,7 +4877,7 @@
       "port-version": 0
     },
     "libcurl-simple-https": {
-      "baseline": "2022-06-29",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "libczi": {
@@ -5049,7 +5049,7 @@
       "port-version": 1
     },
     "libfswatch": {
-      "baseline": "2021-12-23",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "libftdi": {
@@ -5345,7 +5345,7 @@
       "port-version": 1
     },
     "libmountsandbox": {
-      "baseline": "2026-04-21",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "libmpeg2": {
@@ -7281,7 +7281,7 @@
       "port-version": 0
     },
     "offscale-libetcd-cpp": {
-      "baseline": "2019-06-17",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "ogre": {
@@ -7673,7 +7673,7 @@
       "port-version": 0
     },
     "parson": {
-      "baseline": "2026-04-18",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "patternia": {
@@ -8625,7 +8625,7 @@
       "port-version": 0
     },
     "randomstr": {
-      "baseline": "2022-02-03",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "rang": {
@@ -8833,7 +8833,7 @@
       "port-version": 0
     },
     "rhasheq": {
-      "baseline": "2023-08-03",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "riffcpp": {
@@ -10513,7 +10513,7 @@
       "port-version": 0
     },
     "valkey": {
-      "baseline": "2026-04-18",
+      "baseline": "2026-04-28",
       "port-version": 0
     },
     "value-ptr-lite": {

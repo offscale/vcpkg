@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-orm
-    REF             d646dbd98db30a5eb172b18184c30f412ad4d0c3
-    SHA512          edd8d986c393c99065f8ab3203e6c5e575607ab5c0a18d8aa52c2e7dadfdb65456323f4dc33a1ba0caf6f1bb897d1cfbfa3f80f5c2127e0cc0698230c5fbd57a
+    REF             83810c82943344ef28e4ff64532ecd3adc021d6c
+    SHA512          0
     HEAD_REF        master
 )
 

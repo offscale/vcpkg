@@ -1,6 +1,6 @@
 {
   "name": "valkey",
-  "version-date": "2026-04-18",
+  "version-date": "2026-04-28",
   "description": "A flexible distributed key-value database that is optimized for caching and other realtime workloads.",
   "homepage": "https://valkey.io",
   "dependencies": [

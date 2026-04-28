@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-multiplatform
-    REF             54d07b48d60de882d0d41a213a11b41fe8bc4206
-    SHA512          42f00e337affafc761e6116c5c5a379de65d4397775d3fbae9e0b06057b3d477e9334de9b5f977ac74fddcae9f8e36a233b34f477a5f46c98554b781e8196608
+    REF             e7c73a730c8f54d4c7ba7a3f92414744d68b105d
+    SHA512          96270c1a5fbccbe858b5306216374bb35bbbc5fddbdb3fbe112665c479cf9b3c5fc70face2feac410221ee0991aebc5a547cc8a5e9b7e0638323320b536c4786
     HEAD_REF        master
 )
 
