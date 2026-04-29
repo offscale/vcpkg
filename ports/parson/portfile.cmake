@@ -3,8 +3,8 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/parson
-    REF             4a107c8396325848d26e94ca859bbd1ca3afe103 # See commit message for version number
-    SHA512          75b3a91b7cf34d0e48b20c9d7481b0745e1fb6d726aaf70d6308a7d8543d2264587e19e4eeb780d579e5934d7f13a482a83dbb0c5b29ee10a21f81ba59260d9f
+    REF 62e9264e0e3acef37099067291cf03209823a443 # See commit message for version number
+    SHA512 625eb2da39da892621c6830e954730fd22239e9c06f90f2aa11cfd00d7483c1cbd6d0a192b58cec25c2cc9a3dda596a6a73f71af2d57f9e91d04e1158f3cfb34
     HEAD_REF master
     PATCHES
         fix-cmake-files-path.patch
