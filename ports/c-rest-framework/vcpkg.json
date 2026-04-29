@@ -1,6 +1,6 @@
 {
   "name": "c-rest-framework",
-  "version-date": "2026-04-28",
+  "version-date": "2026-04-30",
   "description": "C REST Framework with builtin ORM (PostgreSQL, SQLite, MySQL) native on DOS, Cygwin, Windows, Linux, macOS, etc.",
   "homepage": "https://github.com/SamuelMarks/c-rest-framework",
   "license": "Apache-2.0",

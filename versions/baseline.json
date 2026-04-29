@@ -1561,7 +1561,7 @@
       "port-version": 0
     },
     "c-abstract-http": {
-      "baseline": "2026-04-28",
+      "baseline": "2026-04-30",
       "port-version": 0
     },
     "c-ares": {
@@ -1573,11 +1573,11 @@
       "port-version": 0
     },
     "c-orm": {
-      "baseline": "2026-04-28",
+      "baseline": "2026-04-30",
       "port-version": 0
     },
     "c-rest-framework": {
-      "baseline": "2026-04-28",
+      "baseline": "2026-04-30",
       "port-version": 0
     },
     "c-str-span": {
@@ -7673,7 +7673,7 @@
       "port-version": 0
     },
     "parson": {
-      "baseline": "2026-04-28",
+      "baseline": "2026-04-30",
       "port-version": 0
     },
     "patternia": {
