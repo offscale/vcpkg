@@ -7674,7 +7674,7 @@
     },
     "parson": {
       "baseline": "2026-04-30",
-      "port-version": 0
+      "port-version": 1
     },
     "patternia": {
       "baseline": "0.9.2",
