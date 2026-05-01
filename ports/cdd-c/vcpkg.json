@@ -1,7 +1,6 @@
 {
   "name": "cdd-c",
-  "version-date": "2026-04-30",
-  "port-version": 1,
+  "version-date": "2026-05-02",
   "description": "OpenAPI â†” C. Frontend for C, concentrating on: generation from code; single-file analysis; modification; and emission (prettyprinting).",
   "homepage": "https://rewriteInC.io",
   "license": "Apache-2.0",

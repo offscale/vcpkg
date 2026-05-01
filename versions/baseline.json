@@ -1549,8 +1549,8 @@
       "port-version": 0
     },
     "c-abstract-http": {
-      "baseline": "2026-04-29",
-      "port-version": 1
+      "baseline": "2026-05-02",
+      "port-version": 0
     },
     "c-ares": {
       "baseline": "1.34.6",
@@ -1561,8 +1561,8 @@
       "port-version": 1
     },
     "c-orm": {
-      "baseline": "2026-04-29",
-      "port-version": 1
+      "baseline": "2026-05-02",
+      "port-version": 0
     },
     "c-rest-framework": {
       "baseline": "2026-04-28",
@@ -1669,8 +1669,8 @@
       "port-version": 0
     },
     "cdd-c": {
-      "baseline": "2026-04-30",
-      "port-version": 1
+      "baseline": "2026-05-02",
+      "port-version": 0
     },
     "cddlib": {
       "baseline": "0.94n",

@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/cdd-c
-    REF             f6f37ddbfa3afc25b1a1d1649b253fb482625f90
-    SHA512          dcb3463c6540a515cf93738d5a6afe40829ce2708cff81dab1efc9a1e6efdf9ba75d7e746351edd1cac5b8bc4915b9406772a9f7c7889dbcbf9cf3e5b714c472
+    REF f9d04a35934e3c399b4ca864926653b65662672f
+    SHA512 4c2966e5744eeffd3d347801e3b50e7b6a917eeee04ff90da7b4ed1ffbbef2785dbb2f40da704fd18224224aeeba0f280db869c9bcc8048a1510dfa1d7665bc0
     HEAD_REF        master
 )
 

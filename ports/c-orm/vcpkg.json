@@ -1,7 +1,6 @@
 {
   "name": "c-orm",
-  "version-date": "2026-04-29",
-  "port-version": 1,
+  "version-date": "2026-05-02",
   "description": "SQLite & PostgreSQL compatible simple ORM for C. Alembic/diesel style schema migration support. VERY portable.",
   "homepage": "https://github.com/SamuelMarks/c-orm",
   "license": "Apache-2.0",
