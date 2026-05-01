@@ -416,6 +416,10 @@
       "baseline": "0.5.1",
       "port-version": 0
     },
+    "auto-win-msvc": {
+      "baseline": "2026-04-25",
+      "port-version": 1
+    },
     "autodock-vina": {
       "baseline": "1.2.7",
       "port-version": 0
@@ -1545,36 +1549,36 @@
       "port-version": 0
     },
     "c-abstract-http": {
-      "baseline": "2026-04-30",
-      "port-version": 0
+      "baseline": "2026-04-29",
+      "port-version": 1
     },
     "c-ares": {
       "baseline": "1.34.6",
       "port-version": 1
     },
     "c-multiplatform": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2026-05-01",
+      "port-version": 1
     },
     "c-orm": {
-      "baseline": "2026-04-30",
-      "port-version": 0
+      "baseline": "2026-04-29",
+      "port-version": 1
     },
     "c-rest-framework": {
-      "baseline": "2026-04-30",
-      "port-version": 0
+      "baseline": "2026-04-28",
+      "port-version": 1
     },
     "c-str-span": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2026-04-27",
+      "port-version": 1
     },
     "c4core": {
       "baseline": "0.2.11",
       "port-version": 0
     },
     "c89stringutils": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2026-04-27",
+      "port-version": 1
     },
     "c9y": {
       "baseline": "0.8.0",
@@ -1637,8 +1641,8 @@
       "port-version": 0
     },
     "cauthflow": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2022-11-23",
+      "port-version": 1
     },
     "cblas": {
       "baseline": "2025-10-29",
@@ -1665,8 +1669,8 @@
       "port-version": 0
     },
     "cdd-c": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2026-04-30",
+      "port-version": 1
     },
     "cddlib": {
       "baseline": "0.94n",
@@ -3377,8 +3381,8 @@
       "port-version": 3
     },
     "getopt-bsd": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2023-07-01",
+      "port-version": 1
     },
     "getopt-win32": {
       "baseline": "2.42.0",
@@ -3529,12 +3533,12 @@
       "port-version": 0
     },
     "google-cloud-bucket-c": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2022-07-16",
+      "port-version": 1
     },
     "google-cloud-c": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2023-12-30",
+      "port-version": 1
     },
     "google-cloud-cpp": {
       "baseline": "2.37.0",
@@ -3589,8 +3593,8 @@
       "port-version": 0
     },
     "greatest": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2026-04-02",
+      "port-version": 1
     },
     "grpc": {
       "baseline": "1.76.0",
@@ -4857,8 +4861,8 @@
       "port-version": 0
     },
     "libcurl-simple-https": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2022-06-29",
+      "port-version": 1
     },
     "libczi": {
       "baseline": "0.67.2",
@@ -5029,8 +5033,8 @@
       "port-version": 1
     },
     "libfswatch": {
-      "baseline": "2026-04-30",
-      "port-version": 0
+      "baseline": "2021-12-23",
+      "port-version": 1
     },
     "libftdi": {
       "baseline": "0.20",
@@ -5325,8 +5329,8 @@
       "port-version": 1
     },
     "libmountsandbox": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2026-04-17",
+      "port-version": 1
     },
     "libmpeg2": {
       "baseline": "0.5.1",
@@ -7253,8 +7257,8 @@
       "port-version": 0
     },
     "offscale-libetcd-cpp": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2019-06-17",
+      "port-version": 1
     },
     "ogre": {
       "baseline": "14.5.2",
@@ -7646,7 +7650,7 @@
     },
     "parson": {
       "baseline": "2026-04-30",
-      "port-version": 1
+      "port-version": 2
     },
     "patternia": {
       "baseline": "0.9.2",
@@ -8593,8 +8597,8 @@
       "port-version": 0
     },
     "randomstr": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2022-02-03",
+      "port-version": 1
     },
     "rang": {
       "baseline": "3.2",
@@ -8797,8 +8801,8 @@
       "port-version": 0
     },
     "rhasheq": {
-      "baseline": "2026-04-28",
-      "port-version": 0
+      "baseline": "2023-08-03",
+      "port-version": 1
     },
     "riffcpp": {
       "baseline": "2.2.4",
@@ -10473,7 +10477,7 @@
       "port-version": 0
     },
     "valkey": {
-      "baseline": "2026-04-28",
+      "baseline": "2026-03-27",
       "port-version": 0
     },
     "value-ptr-lite": {

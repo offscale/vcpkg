@@ -1,6 +1,7 @@
 {
   "name": "c-multiplatform",
-  "version-date": "2026-04-28",
+  "version-date": "2026-05-01",
+  "port-version": 1,
   "description": "Cross platform GUI framework in ANSI C (C89), native for: Windows (GDI+); Linux (GTK+4); macOS (Cocoa); iOS; Android; web (WASM). Material 3.",
   "homepage": "https://github.com/SamuelMarks/c-multiplatform",
   "license": "Apache-2.0",

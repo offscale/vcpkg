@@ -1,6 +1,11 @@
 {
   "versions": [
     {
+      "git-tree": "f32809f73b0ce6339ec3e18f7df012231cae0c3a",
+      "version-date": "2026-04-28",
+      "port-version": 1
+    },
+    {
       "git-tree": "91c706b1927797f19aed7fee62b58c658ef74e92",
       "version-date": "2026-04-30",
       "port-version": 0

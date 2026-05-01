@@ -2,7 +2,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO offscale/rhasheq
     REF             474c46bf8bef0632082de4b06345a5c52fc8e481
-    SHA512          0
+    SHA512          48f4d32375843d53e49478d0ef7c0a448cc7d4967a551c007ba145a237b52fd443c3dba1af0204a3aee72ce1e425ba6938f54fa10f9e07fc906c504af69c390a
     HEAD_REF master
 )
 
