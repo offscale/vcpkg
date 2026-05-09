@@ -1,6 +1,6 @@
 {
   "name": "c-abstract-http",
-  "version-date": "2026-05-02",
+  "version-date": "2026-05-09",
   "description": "HTTP/HTTPS client interface reusing abstractions for Windows (WinHTTP,WinINet), macOS (CommonCrypto), iOS, Android, GTK+4 (libsoup), with fallback to libcurl",
   "homepage": "https://github.com/SamuelMarks/c-abstract-http",
   "license": "Apache-2.0",

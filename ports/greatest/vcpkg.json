@@ -1,7 +1,6 @@
 {
   "name": "greatest",
-  "version-date": "2026-04-02",
-  "port-version": 1,
+  "version-date": "2026-05-09",
   "description": "Single-file testing system for C",
   "homepage": "https://github.com/silentbicycle/greatest"
 }

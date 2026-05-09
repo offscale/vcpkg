@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/auto-win-msvc
-    REF             45a68002b63068ecfd5e062d6e59b477543ed9a5
-    SHA512          40da72e1056c9dcc343999496b13db5bd95ac953f589723fe1d6071baf19568d851503a3dfae2c11de0e6f8d4ab992364efb0e431fb9334f0713aae47e8b167a
+    REF             b8b1a84b22ebda2a27e8e4d24a6348e22fafb10e
+    SHA512          6a732c0cf4c2e5d7fc631bab5a5899aab815c1ec4c16862eee53f47d51bad7e968c0c9a93f822d00a6d37d45873a502fe012b2a59f8c6f6b6eaa346f78b9d4c6
     HEAD_REF        master
 )
 

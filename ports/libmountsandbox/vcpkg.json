@@ -1,7 +1,6 @@
 {
   "name": "libmountsandbox",
-  "version-date": "2026-04-17",
-  "port-version": 1,
+  "version-date": "2026-05-09",
   "description": "Cross-platform sandbox environments (docker or windows containers or appcontainer or wasmtime or native); could be the core of a sandbox-feature in an AI agent",
   "homepage": "https://github.com/SamuelMarks/libmountsandbox",
   "dependencies": [
