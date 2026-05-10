@@ -417,7 +417,7 @@
       "port-version": 0
     },
     "auto-win-msvc": {
-      "baseline": "2026-05-10",
+      "baseline": "2026-05-09",
       "port-version": 0
     },
     "autodock-vina": {
@@ -3593,7 +3593,7 @@
       "port-version": 0
     },
     "greatest": {
-      "baseline": "2026-05-10",
+      "baseline": "2026-05-09",
       "port-version": 0
     },
     "grpc": {
@@ -7257,7 +7257,7 @@
       "port-version": 0
     },
     "offscale-libetcd-cpp": {
-      "baseline": "2026-05-10",
+      "baseline": "2026-05-09",
       "port-version": 0
     },
     "ogre": {
@@ -7649,7 +7649,7 @@
       "port-version": 0
     },
     "parson": {
-      "baseline": "2026-05-10",
+      "baseline": "2026-05-09",
       "port-version": 0
     },
     "patternia": {
@@ -8801,7 +8801,7 @@
       "port-version": 0
     },
     "rhasheq": {
-      "baseline": "2026-05-10",
+      "baseline": "2026-05-09",
       "port-version": 0
     },
     "riffcpp": {
