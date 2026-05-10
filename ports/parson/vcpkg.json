@@ -1,6 +1,6 @@
 {
   "name": "parson",
-  "version-date": "2026-05-09",
+  "version-date": "2026-05-10",
   "description": "a lightweight json library written in C",
   "homepage": "https://github.com/kgabis/parson",
   "license": "MIT",

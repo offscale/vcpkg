@@ -417,7 +417,7 @@
       "port-version": 0
     },
     "auto-win-msvc": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "autodock-vina": {
@@ -1557,7 +1557,7 @@
       "port-version": 1
     },
     "c-multiplatform": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "c-orm": {
@@ -1565,7 +1565,7 @@
       "port-version": 0
     },
     "c-rest-framework": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "c-str-span": {
@@ -1669,7 +1669,7 @@
       "port-version": 0
     },
     "cdd-c": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "cddlib": {
@@ -3593,7 +3593,7 @@
       "port-version": 0
     },
     "greatest": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "grpc": {
@@ -7257,7 +7257,7 @@
       "port-version": 0
     },
     "offscale-libetcd-cpp": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "ogre": {
@@ -7649,7 +7649,7 @@
       "port-version": 0
     },
     "parson": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "patternia": {
@@ -8801,7 +8801,7 @@
       "port-version": 0
     },
     "rhasheq": {
-      "baseline": "2026-05-09",
+      "baseline": "2026-05-10",
       "port-version": 0
     },
     "riffcpp": {

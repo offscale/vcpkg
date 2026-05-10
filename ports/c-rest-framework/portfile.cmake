@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-rest-framework
-    REF             4507999476e83a1ee6abc07892562e8a5d6e1555
-    SHA512          b23603283c021e85ffa2264689f3bc1050192a520336d1c49f32c61da2cb7412add5a87fab02cd22f31710ca17f3b2d504f56f6af93a64e0b541e3a1db143dc3
+    REF             c2f8bdd38f15e267aee582a46cfbfbfcc5a0d51b
+    SHA512          fc47c1c1899bb71716300c99bdb5b18c697382e8a3c44a4a0b6d88fa39183e99e00df3fe8ad05762c0cc470f2f26564de9bb101c1671efcbfe0af45a18fbfe79
     HEAD_REF        master
 )
 
