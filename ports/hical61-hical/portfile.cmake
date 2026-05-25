@@ -4,8 +4,13 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO Hical61/Hical
     REF "v${VERSION}"
-    SHA512 714295ef324d375f658a08aba068a2add5c2c82a4de2a1f02e8a929a088575c8e7cf6b8061a2877d06fab33353f079ba8eb10078e3439064fd6d72aac04c49cc
+    SHA512 2c49a71801c10654b6f566a57c604ce19e2e4795ec88b392ce09e2040629a0b2c244b542af9ad46b973b5886382067aae72432e17960ae7e6a53100f36c21a42
     HEAD_REF main
+)
+
+vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+    FEATURES
+        database HICAL_WITH_DATABASE
 )
 
 vcpkg_cmake_configure(
@@ -13,6 +18,8 @@ vcpkg_cmake_configure(
     OPTIONS
         -DHICAL_BUILD_TESTS=OFF
         -DHICAL_BUILD_EXAMPLES=OFF
+        -DHICAL_USE_SYSTEM_PICOHTTPPARSER=ON
+        ${FEATURE_OPTIONS}
 )
 
 vcpkg_cmake_install()
