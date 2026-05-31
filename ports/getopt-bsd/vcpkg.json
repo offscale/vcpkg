@@ -1,6 +1,6 @@
 {
   "name": "getopt-bsd",
-  "version-date": "2026-05-09",
+  "version-date": "2026-05-31",
   "description": "getopt and getopt_long ported from FreeBSD",
   "license": "BSD-3-Clause",
   "supports": "!uwp",

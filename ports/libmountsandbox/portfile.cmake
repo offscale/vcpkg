@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/libmountsandbox
-    REF             2d10b60827a81c8c7e8a4186e95cc4b55e74d87e
-    SHA512          ef10f1a17db145e23ef9390a863eb24c41062acff313208843e07825be3a47e2a268532eea66eb32e75bcf8a35f8c4fe7eb841169d372346b798f2497bebe228
+    REF 2d10b60827a81c8c7e8a4186e95cc4b55e74d87e
+    SHA512 ef10f1a17db145e23ef9390a863eb24c41062acff313208843e07825be3a47e2a268532eea66eb32e75bcf8a35f8c4fe7eb841169d372346b798f2497bebe228
     HEAD_REF        master
 )
 

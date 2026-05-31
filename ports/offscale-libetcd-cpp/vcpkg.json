@@ -1,7 +1,6 @@
 {
   "name": "offscale-libetcd-cpp",
-  "version-date": "2019-07-10",
-  "port-version": 4,
+  "version-date": "2026-05-31",
   "description": "A C++ client library for etcd. etcd is a distributed, reliable key-value store.",
   "homepage": "https://github.com/offscale/libetcd-cpp",
   "dependencies": [
