@@ -137,6 +137,14 @@
           "name": "ffmpeg",
           "default-features": false,
           "features": [
+            "svt-av1"
+          ],
+          "platform": "!x86 & !arm32 & !uwp"
+        },
+        {
+          "name": "ffmpeg",
+          "default-features": false,
+          "features": [
             "aom"
           ],
           "platform": "!(windows & arm) & !uwp"

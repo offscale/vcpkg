@@ -2,8 +2,8 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO awslabs/aws-c-s3
     REF "v${VERSION}"
-    SHA512 9a40f3bd77a96421618244dd5ef197faa65c4aedf913efba1250be2906c734d2ad308b6a58d6167d9756493839f9434b004f6ba828f59a8bab5a086e064f5c03
-    HEAD_REF master
+    SHA512 0a28013378acab14e7dee20fe491492924525ab158fb9b0b5fafbee642493aef0d07253bac61be749c5efe8c902c44bb28ce0c3cda83417baf0f504723b9c6b5
+    HEAD_REF main
 )
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
@@ -35,4 +35,8 @@ file(REMOVE_RECURSE
 
 vcpkg_copy_pdbs()
 
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+vcpkg_install_copyright(
+    FILE_LIST
+        "${SOURCE_PATH}/LICENSE"
+        "${SOURCE_PATH}/NOTICE"
+)

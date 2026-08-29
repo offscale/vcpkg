@@ -2,7 +2,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO FreeRDP/FreeRDP
     REF "${VERSION}"
-    SHA512 81630bb287adfd200ee7845a9d0c304def6612aa357dd5b5ca7286ff7b3022b1d24c511fc1d88109cba0747c33693e72f687d4665f1a674652c87b5323509b4b
+    SHA512 5559616755c3050077589c1000ea451b195cfb450c74d2278c6a09e0c2bfff718293dbc0041428c0a8e8ca321131daa14c92483f70bb5bed4482bb7962f1ef92
     HEAD_REF master
     PATCHES
         dependencies.patch
@@ -92,7 +92,7 @@ vcpkg_cmake_configure(
         -DWITH_CUPS=OFF
         -DWITH_FUSE=OFF
         -DWITH_KRB5=OFF
-        -DWITH_LIBSYSTEMD=OFF
+        -DWITH_SYSTEMD=OFF
         -DWITH_OPUS=OFF
         -DWITH_OSS=OFF
         -DWITH_PCSC=OFF
@@ -152,4 +152,9 @@ file(REMOVE_RECURSE
     "${CURRENT_PACKAGES_DIR}/debug/share"
 )
 
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+vcpkg_install_copyright(
+    FILE_LIST
+        "${SOURCE_PATH}/LICENSE"
+        "${SOURCE_PATH}/winpr/libwinpr/sysinfo/cpufeatures/NOTICE"
+        "${SOURCE_PATH}/winpr/libwinpr/sysinfo/cpufeatures/cpu-features.h"
+)

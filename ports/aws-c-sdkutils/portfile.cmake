@@ -2,8 +2,8 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO awslabs/aws-c-sdkutils
     REF "v${VERSION}"
-    SHA512 4c25a92495d056145c69023922b41a8ec80660171d4b6cbbcc029f63a93e4d57868121b8baca10cb671d275a49ab6d977746871f671bc913f5eee2f960937bc4
-    HEAD_REF master
+    SHA512 d5ba088f6c9e25d59e397dbc534548ab2a270aaa451b949cf3a35d4bbd79aca3248171ab7446f869e7c660d0dbc1335f2a42dc801a340982a03b6b40a70e63d0
+    HEAD_REF main
 )
 
 vcpkg_cmake_configure(
@@ -29,4 +29,8 @@ file(REMOVE_RECURSE
 
 vcpkg_copy_pdbs()
 
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+vcpkg_install_copyright(
+    FILE_LIST
+        "${SOURCE_PATH}/LICENSE"
+        "${SOURCE_PATH}/NOTICE"
+)

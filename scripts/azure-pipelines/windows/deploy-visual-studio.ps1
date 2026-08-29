@@ -1,15 +1,13 @@
 # Copyright (c) Microsoft Corporation.
 # SPDX-License-Identifier: MIT
 
-param([string]$SasToken)
-
 if (Test-Path -LiteralPath "$PSScriptRoot/utility-prefix.ps1") {
   . "$PSScriptRoot/utility-prefix.ps1"
 }
 
 # See https://learn.microsoft.com/en-us/visualstudio/releases/2026/release-history
-# 18.6.0
-$VisualStudioBootstrapperUrl = 'https://download.visualstudio.microsoft.com/download/pr/c40d2503-2e56-4f54-96c2-d886056cfedb/44f811a46b7556514b4fadc906ccc9685f96b63eeb8a36333425b3b315999c22/vs_BuildTools.exe'
+# 18.9.0
+$VisualStudioBootstrapperUrl = 'https://download.visualstudio.microsoft.com/download/pr/b1ea2f6c-5e55-49bc-81e8-7623cc5a6743/bea8826f1b151480c02de854397335663ae4083f7df57df6586cce8520980879/vs_BuildTools.exe'
 $Workloads = @(
   'Microsoft.VisualStudio.Workload.VCTools',
   'Microsoft.VisualStudio.Workload.MSBuildTools',
