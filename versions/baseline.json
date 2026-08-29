@@ -425,7 +425,7 @@
       "port-version": 0
     },
     "auto-win-msvc": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "autodiff": {
@@ -1565,7 +1565,7 @@
       "port-version": 0
     },
     "c-abstract-http": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "c-ares": {
@@ -1573,7 +1573,7 @@
       "port-version": 0
     },
     "c-multiplatform": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "c-orm": {
@@ -1581,11 +1581,11 @@
       "port-version": 0
     },
     "c-rest-framework": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "c-str-span": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "c4core": {
@@ -1593,7 +1593,7 @@
       "port-version": 0
     },
     "c89stringutils": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "c9y": {
@@ -3653,7 +3653,7 @@
       "port-version": 0
     },
     "greatest": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "grpc": {
@@ -4878,6 +4878,10 @@
     },
     "libbpf": {
       "baseline": "1.7.0",
+      "port-version": 0
+    },
+    "libbsd": {
+      "baseline": "0.12.2",
       "port-version": 0
     },
     "libbson": {
@@ -7789,7 +7793,7 @@
       "port-version": 0
     },
     "parson": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-08-29",
       "port-version": 0
     },
     "patternia": {
@@ -9274,10 +9278,6 @@
     },
     "sdl3-net": {
       "baseline": "3.2.0",
-      "port-version": 0
-    },
-    "sdl3-net": {
-      "baseline": "prerelease-3.1.0",
       "port-version": 0
     },
     "sdl3-shadercross": {

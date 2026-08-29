@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO            SamuelMarks/c-abstract-http
-    REF f9e5da0c9e8689713a2fb7ee70d4d61a0f0c3911
-    SHA512 f13050f414af081b76b877702179e66f05dd8c710cce4dc745f88724b1f2cfaac3dd0886a6c6dfebe61dd00350361bf2672db0d70f37854e39e9f441cae5e99d
+    REF 3374cb4aba0a85685fd48e1bcdc99cfe1578a549
+    SHA512 c3684458c0c6ea0b0d7894c163ff83d69c857bdbe329b24fc9debeaab429633646defe311738d930d62ff63a8f30a600a784570b08dbecc3a221136b47b53638
     HEAD_REF        master
 )
 
