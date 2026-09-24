@@ -425,7 +425,7 @@
       "port-version": 0
     },
     "auto-win-msvc": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "autodiff": {
@@ -1565,7 +1565,7 @@
       "port-version": 0
     },
     "c-abstract-http": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "c-ares": {
@@ -1573,19 +1573,19 @@
       "port-version": 0
     },
     "c-multiplatform": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "c-orm": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "c-rest-framework": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "c-str-span": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "c4core": {
@@ -1593,7 +1593,7 @@
       "port-version": 0
     },
     "c89stringutils": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "c9y": {
@@ -1685,7 +1685,7 @@
       "port-version": 0
     },
     "cdd-c": {
-      "baseline": "2026-05-31",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "cddlib": {
@@ -3653,7 +3653,7 @@
       "port-version": 0
     },
     "greatest": {
-      "baseline": "2026-08-29",
+      "baseline": "2026-09-25",
       "port-version": 0
     },
     "grpc": {
