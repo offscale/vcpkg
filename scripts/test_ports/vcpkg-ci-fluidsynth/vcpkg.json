@@ -24,8 +24,9 @@
         {
           "name": "fluidsynth",
           "features": [
-            "libinstpatch"
-          ]
+            "pipewire"
+          ],
+          "platform": "linux"
         },
         {
           "name": "fluidsynth",
